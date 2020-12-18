@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 //const bodyParser = require("body-parser");
-const passport = require("passport");
+//const passport = require("passport");
 
 //Imported Routes
 const users = require("./routes/api/users");
@@ -55,6 +56,7 @@ app.use("/api/metadata", metadata); // This route will be reponsible for all the
 
 if (process.env.NODE_ENV === "production") {
   // https://www.freecodecamp.org/news/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0/
+  // https://stackoverflow.com/questions/53551717/couldnt-find-that-app-when-running-heroku-commands-in-console
   // Serve any static files
   app.use(express.static(path.join(__dirname, "client/build")));
 
