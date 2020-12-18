@@ -87,14 +87,14 @@ const Menu = () => {
             {/* Start of Debates Menu */}
 
             <li className="nav-item has-treeview">
-              <a href="#" className="nav-link">
+              <Link to="#" className="nav-link">
                 <i className="nav-icon fas fa-copy" />
                 <p>
                   Debates Console
                   <i className="fas fa-angle-left right" />
                   <span className="badge badge-info right">6</span>
                 </p>
-              </a>
+              </Link>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
                   <Link to="/dashboard" className="nav-link">
@@ -115,79 +115,79 @@ const Menu = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="" className="nav-link">
+                  <Link href="" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Reports</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="" className="nav-link">
+                  <Link to="" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Administration</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             {/* End of Debates Menu */}
             {/* Committee Reports Start */}
             <li className="nav-item has-treeview">
-              <a href="#" className="nav-link">
+              <Link to="#" className="nav-link">
                 <i className="nav-icon fas fa-users" />
                 <p>
                   Committe Reports
                   <i className="right fas fa-angle-left" />
                 </p>
-              </a>
+              </Link>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="pages/charts/chartjs.html" className="nav-link">
+                  <Link to="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 1</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/charts/flot.html" className="nav-link">
+                  <Link href="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 2</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/charts/inline.html" className="nav-link">
+                  <Link href="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 3</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
             {/* Committee Reports End */}
             {/* Budget Speech */}
             <li className="nav-item has-treeview">
-              <a href="#" className="nav-link">
+              <Link to="#" className="nav-link">
                 <i class="fas fa-rupee-sign nav-icon" />
                 <p>
                   Budget Speech
                   <i className="fas fa-angle-left right" />
                 </p>
-              </a>
+              </Link>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="pages/UI/general.html" className="nav-link">
+                  <Link to="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
 
                     <p>Dashboard</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/UI/icons.html" className="nav-link">
+                  <Link to="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 2</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/UI/buttons.html" className="nav-link">
+                  <Link to="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 3</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -195,37 +195,37 @@ const Menu = () => {
             {/* Budget Speech End */}
             {/* Review Start */}
             <li className="nav-item has-treeview">
-              <a href="#" className="nav-link">
+              <Link to="#" className="nav-link">
                 <i class="nav-icon fas fa-book-reader"></i>
                 <p>
                   Review
                   <i className="fas fa-angle-left right" />
                 </p>
-              </a>
+              </Link>
               <ul className="nav nav-treeview">
                 <li className="nav-item">
-                  <a href="pages/forms/general.html" className="nav-link">
+                  <Link to="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Dashboard</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/forms/advanced.html" className="nav-link">
+                  <Link href="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 1</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/forms/editors.html" className="nav-link">
+                  <Link href="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 2</p>
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="pages/forms/validation.html" className="nav-link">
+                  <Link href="#" className="nav-link">
                     <i className="far fa-circle nav-icon" />
                     <p>Action 3</p>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -233,24 +233,24 @@ const Menu = () => {
 
             <li className="nav-header">MISCELLANEOUS</li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link href="#" className="nav-link">
                 <i className="nav-icon fas fa-file" />
                 <p>Documentation</p>
-              </a>
+              </Link>
             </li>
 
             <li className="nav-header">Action</li>
             <li className="nav-item">
-              <a href="#" className="nav-link" onClick={onLogout}>
+              <Link href="#" className="nav-link" onClick={onLogout}>
                 <i class="nav-icon fas fa-sign-out-alt text-danger"></i>
                 <p className="text">Logout</p>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link href="#" className="nav-link">
                 <i class="nav-icon fas fa-question-circle text-warning"></i>
                 <p>Contact Support</p>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

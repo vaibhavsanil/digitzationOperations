@@ -57,6 +57,7 @@ app.use("/api/metadata", metadata); // This route will be reponsible for all the
 if (process.env.NODE_ENV === "production") {
   // https://www.freecodecamp.org/news/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0/
   // https://stackoverflow.com/questions/53551717/couldnt-find-that-app-when-running-heroku-commands-in-console
+  // https://blog.bitsrc.io/react-production-deployment-part-3-heroku-316319744885
   // Serve any static files
   app.use(express.static(path.join(__dirname, "client/build")));
 
