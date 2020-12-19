@@ -163,7 +163,7 @@ const Menu = () => {
             {/* Budget Speech */}
             <li className="nav-item has-treeview">
               <Link to="#" className="nav-link">
-                <i class="fas fa-rupee-sign nav-icon" />
+                <i className="fas fa-rupee-sign nav-icon" />
                 <p>
                   Budget Speech
                   <i className="fas fa-angle-left right" />
@@ -233,7 +233,7 @@ const Menu = () => {
 
             <li className="nav-header">MISCELLANEOUS</li>
             <li className="nav-item">
-              <Link href="#" className="nav-link">
+              <Link to="#" className="nav-link">
                 <i className="nav-icon fas fa-file" />
                 <p>Documentation</p>
               </Link>
@@ -241,13 +241,13 @@ const Menu = () => {
 
             <li className="nav-header">Action</li>
             <li className="nav-item">
-              <Link href="#" className="nav-link" onClick={onLogout}>
+              <Link to="#" className="nav-link" onClick={onLogout}>
                 <i class="nav-icon fas fa-sign-out-alt text-danger"></i>
                 <p className="text">Logout</p>
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="#" className="nav-link">
+              <Link to="#" className="nav-link">
                 <i class="nav-icon fas fa-question-circle text-warning"></i>
                 <p>Contact Support</p>
               </Link>
