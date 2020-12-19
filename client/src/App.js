@@ -18,6 +18,7 @@ import { SearchTableNew } from "./utils/SearchTableNew.component";
 
 //Importing Private Route
 import PrivateRoute from "./components/routing/PrivateRoute";
+import CheckLogin from "./components/routing/CheckLogin";
 
 // Import Set Auth Token
 import setAuthToken from "./utils/setAuthToken";
@@ -45,7 +46,8 @@ function App() {
               <Fragment>
                 <Switch>
                   {/* Check if this rendein can be conditional */}
-                  <Route exact path="/login" component={Login} />
+                  <CheckLogin path="/login" component={Login} />
+                  {/* <Route exact path="/login" component={Login} /> */}
                 </Switch>
                 {/*  <Switch>
                   <Route exact path="/register" component={Register} />
