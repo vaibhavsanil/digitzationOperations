@@ -39,6 +39,8 @@ const TableDashboard = () => {
     getBookStruct,
   } = bookContext;
 
+  const { token } = authContext;
+
   useEffect(() => {
     getBookStruct();
   }, []);

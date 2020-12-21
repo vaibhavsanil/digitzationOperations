@@ -8,6 +8,7 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
 } from "../types";
+import setAuthToken from "../../utils/setAuthToken";
 
 export default (state, action) => {
   switch (action.type) {
@@ -22,10 +23,11 @@ export default (state, action) => {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
-      console.info(
-        "[DEBUG Auth Reducer Check Token]",
-        localStorage.getItem("token")
-      );
+      setAuthToken(localStorage.getItem("token"));
+      // console.info(
+      //   "[DEBUG Auth Reducer Check Token]",
+      //   localStorage.getItem("token")
+      // );
       // console.info(
       //   "[DEBUG Auth Reducer jwt Check Token]",
       //   localStorage.getItem("jwtToken")
@@ -44,6 +46,7 @@ export default (state, action) => {
     case LOGOUT:
       localStorage.removeItem("token");
       //console.info("[DEBUG] Auth Reducer ", typeof action.payload);
+      setAuthToken("");
       let errorValue = action.payload ? action.payload : {};
       return {
         ...state,

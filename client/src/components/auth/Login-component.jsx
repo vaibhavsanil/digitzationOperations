@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 
+import setAuthToken from "../../utils/setAuthToken";
+
 import classnames from "classnames";
 import {
   LOGIN_CLASS_BODY,
@@ -50,11 +52,12 @@ const Login = (props) => {
       loadUser();
     }
 
-    if (authContext.isAuthenticated) {
+    if (authContext.token) {
       // var items = document.getElementsByClassName("wrapper");
       // // console.info("[DEBUG] Login-Component css ", items);
       // items[0].style.removeProperty("display");
       //items[0].style.display = "inline";
+      setAuthToken(localStorage.token);
       props.history.push("/dashboard");
       //sidebar-mini
     }
@@ -74,12 +77,24 @@ const Login = (props) => {
       email,
       password,
     });
+
+    // Promise.all([login]).then((values) => {
+    //   console.info("[DASHBOARD] Loging Component ", values);
+    //   if (authContext.isAuthenticated) {
+    //     // var items = document.getElementsByClassName("wrapper");
+    //     // // console.info("[DEBUG] Login-Component css ", items);
+    //     // items[0].style.removeProperty("display");
+    //     //items[0].style.display = "inline";
+    //     props.history.push("/dashboard");
+    //     //sidebar-mini
+    //   }
+    // });
   };
 
   return (
     <div className="login-box">
       <div className="login-logo">
-        <a href="../../index2.html">
+        <a href="#">
           <span style={CustomerHeaderStyle}>{CUSTOMER}</span> Digitization
           Operations Console
         </a>
