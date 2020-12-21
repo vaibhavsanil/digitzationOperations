@@ -86,7 +86,7 @@ const Menu = () => {
 
             {/* Start of Debates Menu */}
 
-            <li className="nav-item has-treeview">
+            <li className="nav-item has-treeview menu-open">
               <Link to="#" className="nav-link">
                 <i className="nav-icon fas fa-copy" />
                 <p>
@@ -95,7 +95,7 @@ const Menu = () => {
                   <span className="badge badge-info right">6</span>
                 </p>
               </Link>
-              <ul className="nav nav-treeview">
+              <ul className="nav nav-treeview" style={{ display: "block" }}>
                 <li className="nav-item">
                   <Link to="/dashboard" className="nav-link">
                     <i className="far fa-circle nav-icon" />
