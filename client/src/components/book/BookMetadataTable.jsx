@@ -292,7 +292,11 @@ const BookMetadataTable = () => {
       Footer: "Debate Title",
       accessor: "debate_title_subject",
       Cell: ({ value }) => {
-        return value.name_eng;
+        if (value === undefined) {
+          return "NA";
+        } else {
+          return value.name_eng;
+        }
       },
     },
     {
@@ -308,22 +312,22 @@ const BookMetadataTable = () => {
         return format(new Date(value), "dd/MM/yyyy");
       },
     },
-    {
-      Header: "Debate Participants",
-      Footer: "Debate Participants",
-      accessor: "debate_participants",
-      Cell: ({ value }) => {
-        // console.info("[Table Debate Particiapant] ", value);
-        let itemArray = [];
-        value.map((item) => {
-          // console.info("[Table Debate Particiapant Map] ", item);
-          itemArray.push(item.name_eng);
-        });
-        //console.info("[Table Debate Particiapant ItemArray] ", itemArray);
-        const members = itemArray.join(", ");
-        return members;
-      },
-    },
+    // {
+    //   Header: "Debate Participants",
+    //   Footer: "Debate Participants",
+    //   accessor: "debate_participants",
+    //   Cell: ({ value }) => {
+    //     // console.info("[Table Debate Particiapant] ", value);
+    //     let itemArray = [];
+    //     value.map((item) => {
+    //       // console.info("[Table Debate Particiapant Map] ", item);
+    //       itemArray.push(item.name_eng);
+    //     });
+    //     //console.info("[Table Debate Particiapant ItemArray] ", itemArray);
+    //     const members = itemArray.join(", ");
+    //     return members;
+    //   },
+    // },
 
     {
       Header: "Status",

@@ -53,15 +53,15 @@ const StructBookSchema = new Schema({
     unique: true,
   },
   assembly_number: {
-    type: Number, // Denotes the assembly number of the session
+    type: String, // Denotes the assembly number of the session
     required: true,
   },
   session_number: {
-    type: Number, // Denotes the session number of the ongoing session
+    type: String, // Denotes the session number of the ongoing session
     required: true,
   },
   volume_number: {
-    type: Number, // Volume Number of the Book
+    type: String, // Volume Number of the Book
   },
   part_number: {
     type: Number, // Part Number of the Book

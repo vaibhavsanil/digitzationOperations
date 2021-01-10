@@ -151,8 +151,8 @@ export const BookSummary = ({ id }) => {
 
   const optionsSession = [
     { label: "* Select Place Of Session", value: 0 },
-    { label: "Bangalore", value: "Bangalore" },
-    { label: "Belegavi", value: "Belegavi" },
+    { label: "Bangalore", value: "bangalore" },
+    { label: "Belegavi", value: "belegavi" },
   ];
   const optionsBinding = [
     { label: "--Binding Status--", value: false },

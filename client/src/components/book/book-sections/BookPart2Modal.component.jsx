@@ -378,10 +378,10 @@ const MetadataSectionModalPart2 = ({
   const [selectedAnnexure, setSelectedAnnexure] = useState([]);
   // https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript
 
-  function getUniqueListBy(arr, key) {
-    //  Array to remove the duplicate entries in the object
-    return [...new Map(arr.map((item) => [item[key], item])).values()];
-  }
+  // function getUniqueListBy(arr, key) {
+  //   //  Array to remove the duplicate entries in the object
+  //   return [...new Map(arr.map((item) => [item[key], item])).values()];
+  // }
 
   useEffect(() => {
     const selectDatesInst = selectedDates ? selectedDates[0] : "";
@@ -621,32 +621,18 @@ const MetadataSectionModalPart2 = ({
                     />
                   </div>
                 </div>
-
-                <div className="col-12" style={{ display: "flex" }}>
-                  {/* <div className="col-6">
-                    <div className="form-group">
-                      <label>Minister's Name</label>
-                      <MultiSelect
-                        options={membersSection}
-                        value={selectedMinister}
-                        onChange={setSelectedMinister}
-                        labelledBy={"Select Minister's Name"}
-                      />
-                    </div>
-                  </div> */}
-
-                  <div className="col-12">
-                    <div className="form-group">
-                      <label>Select Ministry</label>
-                      <MultiSelect
-                        options={portfolioObject}
-                        value={selectedPortfolio}
-                        onChange={setSelectedPortfolio}
-                        labelledBy={"Select Portfolio"}
-                      />
-                    </div>
+                <div className="col-12">
+                  <div className="form-group">
+                    <label>Select Ministry</label>
+                    <MultiSelect
+                      options={portfolioObject}
+                      value={selectedPortfolio}
+                      onChange={setSelectedPortfolio}
+                      labelledBy={"Select Portfolio"}
+                    />
                   </div>
                 </div>
+
                 <div className="col-12">
                   <div className="form-group">
                     <label>Select Debate Annexure's</label>

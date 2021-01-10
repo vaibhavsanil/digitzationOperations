@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const keys = require("./config/keys");
 //const bodyParser = require("body-parser");
 //const passport = require("passport");
 
@@ -26,7 +27,12 @@ mongoose.Promise = global.Promise;
 
 //DB Config
 //Check if the APP Variable connects to KLA or KLC
-const db = require("./config/keys").mongoatlas;
+if (keys.CUSTOMER === "KLA") {
+  var db = keys.localMongoURI_KLA_OPS;
+} else {
+  var db = keys.localMongoURI_KLC_OPS;
+}
+// const db = keys.mongoatlas;
 console.log(db);
 
 // Connect to MongoDB
