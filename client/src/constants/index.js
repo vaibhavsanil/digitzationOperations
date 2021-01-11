@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // GLOBAL CONSTANTS
-export const CUSTOMER = "KLA";
+export const CUSTOMER = "KLC";
 
 // Classes
 export const CUSTOMER_NAME_COLOUR = "#46A049";

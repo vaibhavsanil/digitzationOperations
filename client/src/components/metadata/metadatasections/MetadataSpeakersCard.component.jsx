@@ -264,7 +264,11 @@ const MetadataSectionCardSpeaker = () => {
             {/* /.card-header */}
             <div className="card-body">
               <SearchTableNew
-                tableHeaderName="DATATABLE OF ADDED SPEAKERS"
+                tableHeaderName={
+                  CUSTOMER === "KLA"
+                    ? "DATATABLE OF ADDED SPEAKER'S"
+                    : "DATATABLE OF ADDED CHAIRMAN'S"
+                }
                 CUSTOMER={CUSTOMER}
                 columns_table={COLUMNS}
                 loading={loading}

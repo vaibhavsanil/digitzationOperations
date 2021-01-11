@@ -89,16 +89,20 @@ const AddBook = ({
                   <div className="row">
                     <div className="col-sm-6">
                       {/* required */}
-                      <TextFieldGroup
-                        placeholder="AssemblyNumber"
-                        name="assembly_number"
-                        value={otherCollectionProps.assembly_number}
-                        onChange={onChange}
-                        error={errors.assembly_number}
-                        id="assembly_number"
-                        labelText="Assembly Number"
-                        formWidth="col-4"
-                      />
+                      {CUSTOMER === "KLA" ? (
+                        <TextFieldGroup
+                          placeholder="AssemblyNumber"
+                          name="assembly_number"
+                          value={otherCollectionProps.assembly_number}
+                          onChange={onChange}
+                          error={errors.assembly_number}
+                          id="assembly_number"
+                          labelText="Assembly Number"
+                          formWidth="col-4"
+                        />
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="col-sm-6">
                       {/* not required */}

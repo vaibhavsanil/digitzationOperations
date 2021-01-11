@@ -73,6 +73,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const port = process.env.PORT || 5000;
+if (keys.CUSTOMER === "KLA") {
+  var port = process.env.PORT || 9001;
+} else {
+  var port = process.env.PORT || 9200;
+}
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

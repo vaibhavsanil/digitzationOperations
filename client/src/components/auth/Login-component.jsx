@@ -66,9 +66,16 @@ const Login = (props) => {
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
   //Customer Head Styles
-  const CustomerHeaderStyle = {
+  const CustomerHeaderStyleKLA = {
     fontWeight: "500",
-    color: CUSTOMER_NAME_COLOUR,
+    color: "#42A846 ",
+    marginRight: "15px",
+  };
+
+  const CustomerHeaderStyleKLC = {
+    fontWeight: "500",
+    color: "#46A049 ",
+    marginRight: "15px",
   };
 
   const onSubmit = (e) => {
@@ -95,8 +102,12 @@ const Login = (props) => {
     <div className="login-box">
       <div className="login-logo">
         <a href="#">
-          <span style={CustomerHeaderStyle}>{CUSTOMER}</span> Digitization
-          Operations Console
+          {CUSTOMER === "KLA" ? (
+            <span style={CustomerHeaderStyleKLA}> {CUSTOMER}</span>
+          ) : (
+            <span style={CustomerHeaderStyleKLC}> {CUSTOMER}</span>
+          )}
+          Digitization Operations Console
         </a>
       </div>
       {/* /.login-logo */}

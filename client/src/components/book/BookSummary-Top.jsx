@@ -245,16 +245,20 @@ export const BookSummary = ({ id }) => {
           <div className="col-md-10 mx-auto">
             <div className="row">
               <div className="col-sm-6">
-                <TextFieldGroup
-                  placeholder="AssemblyNumber"
-                  name="assembly_number"
-                  value={bookState.assembly_number}
-                  onChange={onChange}
-                  error={errors.assembly_number}
-                  id="assembly_number"
-                  labelText="Assembly Number"
-                  formWidth="col-4"
-                />
+                {CUSTOMER === "KLA" ? (
+                  <TextFieldGroup
+                    placeholder="AssemblyNumber"
+                    name="assembly_number"
+                    value={bookState.assembly_number}
+                    onChange={onChange}
+                    error={errors.assembly_number}
+                    id="assembly_number"
+                    labelText="Assembly Number"
+                    formWidth="col-4"
+                  />
+                ) : (
+                  ""
+                )}
               </div>
               <div className="col-sm-6">
                 <SelectListGroup
