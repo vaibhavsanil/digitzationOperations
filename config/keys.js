@@ -1,5 +1,5 @@
 module.exports = {
-  CUSTOMER: "KLC",
+  CUSTOMER: "KLA",
   mongoURI: "mongodb://vaibhavsanil:Kalavathi5@ds363098.mlab.com:63098/kla-ops",
   mongoLocalURI: "mongodb://localhost/kla-ops",
   secretOrKey: "secret",

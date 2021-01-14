@@ -8,7 +8,9 @@
     "client": "npm start --prefix client",
     "clientinstall": "npm install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "sdc-build": "NODE_ENV=production node server.js",
+    "sdc-build-pm2":"NODE_ENV=production pm2 start server.js"
   },
   "author": "Vaibhav Sanil",
   "license": "ISC",
