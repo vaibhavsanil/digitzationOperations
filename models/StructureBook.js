@@ -89,7 +89,7 @@ const StructBookSchema = new Schema({
   ],
 
   status_of_books: {
-    type: String, //DOUBT Status of the Book[UPLOADED,OCR'ed,PDF's GENERATED,INDEXED,CREATED,LIVE]
+    type: String, //DOUBT Status of the Book[UPLOADED,OCR'ed,PDF's GENERATED,INDEXED,CREATED,Book Live]
     default: "Book Created",
   },
 

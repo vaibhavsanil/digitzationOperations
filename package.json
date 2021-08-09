@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "sdc-build": "NODE_ENV=production node server.js",
-    "sdc-build-pm2":"NODE_ENV=production pm2 start server.js"
+    "sdc-build-pm2": "NODE_ENV=production pm2 start server.js"
   },
   "author": "Vaibhav Sanil",
   "license": "ISC",
@@ -30,5 +30,19 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0"
-  }
+  },
+  "bundledDependencies": [
+    "bcryptjs",
+    "body-parser",
+    "busboy",
+    "config",
+    "express",
+    "mongoose",
+    "nodemon",
+    "passport",
+    "passport-jwt",
+    "sweetalert2",
+    "sweetalert2-react-content",
+    "validator"
+  ]
 }

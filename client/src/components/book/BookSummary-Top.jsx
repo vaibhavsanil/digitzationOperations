@@ -141,7 +141,7 @@ export const BookSummary = ({ id }) => {
     let dateVar = e.target.value;
     let dateVarRes = dateVar.split(",");
 
-    console.info("[DEBUG] change date in ADD Book Action", dateVarRes);
+    //console.info("[DEBUG] change date in ADD Book Action", dateVarRes);
 
     setBookState({
       ...bookState,

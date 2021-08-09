@@ -160,6 +160,7 @@ const BookState = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
+
     };
 
     // const getDispatchType = (metadatatype) => {
@@ -388,7 +389,7 @@ const BookState = (props) => {
         payload: res.data,
       });
     } catch (error) {
-      console.info("[DEBUG ERROR] get MetDataItem  error", error);
+      // console.info("[DEBUG ERROR] get MetDataItem  error", error);
       dispatch({
         type: METADATA_ERROR,
         payload: error.response.data.sectionalbook,

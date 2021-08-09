@@ -129,7 +129,8 @@ router.get(
   auth,
   (req, res) => {
     const errors = {};
-    StructureBook.find({})
+    // https://stackoverflow.com/questions/24348437/mongoose-select-a-specific-field-with-find
+    StructureBook.find({}, { OCR_PAGES_TEXT: 0 })
       .then((books) => {
         if (!books) {
           errors.structbook = "This Collections is empty";
@@ -155,7 +156,7 @@ router.get(
   auth,
   (req, res) => {
     const errors = {};
-    StructureBook.findOne({ _id: req.params.bookId })
+    StructureBook.findOne({ _id: req.params.bookId }, { OCR_PAGES_TEXT: 0 })
       .then((book) => {
         if (!book) {
           errors.structbook = "There is no book for this Book Id";
