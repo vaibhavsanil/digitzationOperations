@@ -1,6 +1,6 @@
-import React from "react";
-import classnames from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 const SelectListGroup = ({
   name,
@@ -24,10 +24,9 @@ const SelectListGroup = ({
       <label for={id}>{labelText}</label>
       <select
         className={classnames(`form-control form-control ${formWidth}`, {
-          "is-invalid": error,
+          'is-invalid': error,
         })}
         name={name}
-        value={value}
         onChange={onChange}
       >
         {selectOptions}
@@ -42,7 +41,7 @@ const SelectListGroup = ({
 SelectListGroup.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  // value: PropTypes.string.isRequired,
   info: PropTypes.string,
   error: PropTypes.string,
   type: PropTypes.string.isRequired,

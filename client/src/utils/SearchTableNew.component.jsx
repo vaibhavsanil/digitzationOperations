@@ -1,15 +1,15 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
+import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import {
   useTable,
   useSortBy,
   useGlobalFilter,
   usePagination,
-} from "react-table";
+} from 'react-table';
 
-import { GlobalFilter } from "./GlobalFilter";
+import { GlobalFilter } from './GlobalFilter';
 
-import "./SearchTableNew.scss";
+import './SearchTableNew.scss';
 
 //import MOCK_DATA from "./MOCK_DATA.json";
 //import { COLUMNS, GROUPED_COLUMNS } from "./columns";
@@ -74,22 +74,26 @@ export const SearchTableNew = ({
   const { globalFilter, pageIndex, pageSize } = state;
 
   function addMetadataGlobalFilter(customer, metadataType) {
-    if (metadataType === "Speaker") {
-      return customer === "KLA" ? "Speaker's" : "Chairman's";
-    } else if (metadataType === "Member") {
-      return customer === "KLA" ? "Member's" : "Member's";
-    } else if (metadataType === "debateTitle") {
-      return customer === "KLA" ? "Debate Title's" : "Debate Title's";
-    } else if (metadataType === "portfolio") {
-      return customer === "KLA" ? "Portfolio's" : "Portfolio's";
-    } else if (metadataType === "issues") {
-      return customer === "KLA" ? "Issues's" : "Issues's";
-    } else if (metadataType === "tags") {
-      return customer === "KLA" ? "Tag's" : "Tag's";
-    } else if (metadataType === "annexure") {
+    if (metadataType === 'Speaker') {
+      return customer === 'KLA' ? "Speaker's" : "Chairman's";
+    } else if (metadataType === 'Member') {
+      return customer === 'KLA' ? "Member's" : "Member's";
+    } else if (metadataType === 'debateTitle') {
+      return customer === 'KLA' ? "Debate Title's" : "Debate Title's";
+    } else if (metadataType === 'portfolio') {
+      return customer === 'KLA' ? "Portfolio's" : "Portfolio's";
+    } else if (metadataType === 'issues') {
+      return customer === 'KLA' ? "Issues's" : "Issues's";
+    } else if (metadataType === 'tags') {
+      return customer === 'KLA' ? "Tag's" : "Tag's";
+    } else if (metadataType === 'annexure') {
       return "Annexure's";
-    } else if (metadataType === "metadata") {
-      return "Metadata ";
+    } else if (metadataType === 'metadata') {
+      return 'Metadata ';
+    } else if (metadataType === 'users') {
+      return "User's";
+    } else if (metadataType === 'logs') {
+      return "Log's";
     }
   }
 
@@ -98,10 +102,10 @@ export const SearchTableNew = ({
   //console.log(searchTableName);
 
   const tableStyle = {
-    display: "block",
-    height: "400px",
-    overflowY: "scroll",
-    borderRadius: "2px",
+    display: 'block',
+    height: '400px',
+    overflowY: 'scroll',
+    borderRadius: '2px',
   };
 
   return (
@@ -116,17 +120,17 @@ export const SearchTableNew = ({
                   <h3
                     className="card-title"
                     style={{
-                      marginTop: "6px",
+                      marginTop: '6px',
                     }}
                   >
-                    <b> {tableHeaderName} </b>{" "}
+                    <b> {tableHeaderName} </b>{' '}
                   </h3>
                   {/* TODO- Conditional Rendering of Buttons for RED Clolour for KLC as per the passed props */}
                 </div>
                 {/* /.card-header */}
                 <div className="card-body">
                   {number_sections && number_sections > 0 ? (
-                    <div className="row" style={{ display: "flex" }}>
+                    <div className="row" style={{ display: 'flex' }}>
                       <div className="col-5">
                         <h5>
                           Number of Section's in the Book: {number_sections}
@@ -134,7 +138,7 @@ export const SearchTableNew = ({
                       </div>
                       <div
                         className="col-7 mr-1"
-                        style={{ marginBottom: "6px", marginLeft: "-15%" }}
+                        style={{ marginBottom: '6px', marginLeft: '-15%' }}
                       >
                         <GlobalFilter
                           filter={globalFilter}
@@ -145,7 +149,7 @@ export const SearchTableNew = ({
                     </div>
                   ) : (
                     <div className="row">
-                      <div className="col-8" style={{ marginLeft: "243px" }}>
+                      <div className="col-8" style={{ marginLeft: '243px' }}>
                         <GlobalFilter
                           filter={globalFilter}
                           setFilter={setGlobalFilter}
@@ -165,26 +169,26 @@ export const SearchTableNew = ({
                       {headerGroups.map((headerGroup) => (
                         <tr
                           style={{
-                            width: "100%",
+                            width: '100%',
                           }}
                           {...headerGroup.getHeaderGroupProps()}
                         >
                           {headerGroup.headers.map((column) => (
                             <th
                               style={{
-                                width: "500px",
+                                width: '500px',
                               }}
                               {...column.getHeaderProps(
                                 column.getSortByToggleProps()
                               )}
                             >
-                              {column.render("Header")}
-                              <span style={{ display: "inline-block" }}>
+                              {column.render('Header')}
+                              <span style={{ display: 'inline-block' }}>
                                 {column.isSorted
                                   ? column.isSortedDesc
-                                    ? " 🔽"
-                                    : " 🔼"
-                                  : ""}
+                                    ? ' 🔽'
+                                    : ' 🔼'
+                                  : ''}
                               </span>
                             </th>
                           ))}
@@ -200,7 +204,7 @@ export const SearchTableNew = ({
                               {row.cells.map((cell) => {
                                 return (
                                   <td {...cell.getCellProps()}>
-                                    {cell.render("Cell")}
+                                    {cell.render('Cell')}
                                   </td>
                                 );
                               })}
@@ -211,8 +215,8 @@ export const SearchTableNew = ({
                     ) : (
                       <h6
                         style={{
-                          textAlign: "center",
-                          marginTop: "15px",
+                          textAlign: 'center',
+                          marginTop: '15px',
                         }}
                       >
                         There are no items in the Table ... Please Add One
@@ -261,8 +265,8 @@ export const SearchTableNew = ({
 };
 
 SearchTableNew.defaultProps = {
-  tableHeaderName: "Datatable of Added Speakers",
-  customer: "KLA",
+  tableHeaderName: 'Datatable of Added Speakers',
+  customer: 'KLA',
   columns_table: [],
 };
 

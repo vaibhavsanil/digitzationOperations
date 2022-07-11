@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import swal from "sweetalert";
-import PropTypes from "prop-types";
+import React, { useContext, useEffect, useState } from 'react';
+import swal from 'sweetalert';
+import PropTypes from 'prop-types';
 
-import TableItems from "./TableItem.Components";
+import TableItems from './TableItem.Components';
 
-import AddItemModal from "./metadataModals/MetadataSectionModal.component";
-import MetadataContext from "../context/metadata/metadataContext";
+import AddItemModal from './metadataModals/MetadataSectionModal.component';
+import MetadataContext from '../context/metadata/metadataContext';
 
 import {
   ADD_EDIT_SPEAKER_TITLE_MODAL,
   ADD_EDIT_CHAIRMAN_TITLE_MODAL,
   CUSTOMER,
-} from "../constants/index";
+} from '../constants/index';
 
 const SearchTable = ({
   tableHeaderName,
@@ -47,12 +47,12 @@ const SearchTable = ({
   };
 
   const [speaker, setSpeaker] = useState({
-    name_eng: "",
-    name_kan: "",
+    name_eng: '',
+    name_kan: '',
     status: null,
     id: null,
-    lastModifiedAt: "",
-    lastModifiedBy: "  ",
+    lastModifiedAt: '',
+    lastModifiedBy: '  ',
   });
 
   const [loading, setLoading] = useState({
@@ -66,12 +66,12 @@ const SearchTable = ({
   const initSpeakerState = () => {
     // Intializing the Spekaer State to Null
     setSpeaker({
-      name_eng: "",
-      name_kan: "",
+      name_eng: '',
+      name_kan: '',
       status: null,
       id: null,
-      lastModifiedAt: "",
-      lastModifiedBy: "",
+      lastModifiedAt: '',
+      lastModifiedBy: '',
     });
     setLoading({ buttonLoading: false });
   };
@@ -104,34 +104,34 @@ const SearchTable = ({
     if (currentSpeaker) {
       setLoading({ buttonLoading: true });
       const speakerInstance = speaker;
-      delete speakerInstance["lastModifiedAt"];
-      delete speakerInstance["lastModifiedBy"];
+      delete speakerInstance['lastModifiedAt'];
+      delete speakerInstance['lastModifiedBy'];
       const successMsg = addSpeaker(speakerInstance);
 
       if (successMsg) {
         setLoading({ buttonLoading: false });
-        swal("Good job!", successMsg, "success");
+        swal('Good job!', successMsg, 'success');
       }
 
       if (errors.speakerName) {
         setLoading({ buttonLoading: false });
-        swal("Awww Snap !!!", errors.speakerName, "error");
+        swal('Awww Snap !!!', errors.speakerName, 'error');
       }
     } else {
       //Call the Add Speaker Action
       setLoading({ buttonLoading: true });
       const speakerInstance = speaker;
-      delete speakerInstance["lastModifiedAt"];
-      delete speakerInstance["lastModifiedBy"];
-      delete speakerInstance["id"];
+      delete speakerInstance['lastModifiedAt'];
+      delete speakerInstance['lastModifiedBy'];
+      delete speakerInstance['id'];
 
       addSpeaker(speakerInstance).then((responseMsg) => {
-        if (typeof responseMsg === "string") {
+        if (typeof responseMsg === 'string') {
           initSpeakerState();
-          swal("Good job!", responseMsg, "success");
+          swal('Good job!', responseMsg, 'success');
         } else {
           initSpeakerState();
-          swal("Awww Snap !!!", responseMsg.response.data.speakerName, "error");
+          swal('Awww Snap !!!', responseMsg.response.data.speakerName, 'error');
         }
       });
     }
@@ -148,23 +148,23 @@ const SearchTable = ({
                 <h3
                   className="card-title"
                   style={{
-                    marginTop: "6px",
+                    marginTop: '6px',
                   }}
                 >
-                  <b> {tableHeaderName} </b>{" "}
+                  <b> {tableHeaderName} </b>{' '}
                 </h3>
                 {/* TODO- Conditional Rendering of Buttons for RED Clolour for KLC as per the passed props */}
                 <button
                   type="button"
                   className={
-                    "btn " + (customer === "KLA" ? "btn-success" : "btn-danger")
+                    'btn ' + (customer === 'KLA' ? 'btn-success' : 'btn-danger')
                   }
                   data-toggle="modal"
                   data-target="#addSpeaker-modal-metadata"
                   style={{
-                    float: "right",
-                    width: "158px",
-                    display: "none",
+                    float: 'right',
+                    width: '158px',
+                    display: 'none',
                   }}
                 >
                   Add Book
@@ -209,7 +209,7 @@ const SearchTable = ({
         {/* Modal Open */}
         <AddItemModal
           modalTitle={
-            CUSTOMER === "KLA"
+            CUSTOMER === 'KLA'
               ? ADD_EDIT_SPEAKER_TITLE_MODAL
               : ADD_EDIT_CHAIRMAN_TITLE_MODAL
           }
@@ -226,7 +226,7 @@ const SearchTable = ({
 };
 
 SearchTable.propTypes = {
-  tableHeader: PropTypes.array.isRequired,
+  tableHeader: PropTypes.string.isRequired,
   tableHeaderName: PropTypes.string.isRequired,
   customer: PropTypes.string,
   //tableItems: PropTypes.array.isRequired,

@@ -1,8 +1,8 @@
-import React, { useReducer } from "react";
-import axios from "axios";
+import React, { useReducer } from 'react';
+import axios from 'axios';
 
-import MetadataContext from "./metadataContext";
-import metadataReducer from "./metadataReducer";
+import MetadataContext from './metadataContext';
+import metadataReducer from './metadataReducer';
 
 import {
   ADD_SPEAKER,
@@ -14,7 +14,7 @@ import {
   SET_CURRENT_ITEM_NULL,
   GET_MEMBER_ALL,
   MEMBER_ERROR,
-} from "../types";
+} from '../types';
 
 const MetadataState = (props) => {
   const initialState = {
@@ -84,12 +84,12 @@ const MetadataState = (props) => {
   const getSpeakerItems = async () => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
     try {
-      const res = await axios.get("/api/metadata/speaker/all", config);
+      const res = await axios.get('/api/metadata/speaker/all', config);
 
       dispatch({ type: GET_SPEAKER_ALL, payload: res.data });
     } catch (error) {
@@ -105,12 +105,12 @@ const MetadataState = (props) => {
     //setCurrentItemToNull();
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     try {
       const res = await axios.post(
-        "/api/metadata/speaker/new",
+        '/api/metadata/speaker/new',
         speaker,
         config
       );
@@ -172,7 +172,7 @@ const MetadataState = (props) => {
     // errorName = memberName
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
@@ -183,10 +183,8 @@ const MetadataState = (props) => {
     try {
       const res = await axios.get(`/api/metadata/${metadataType}/all`, config);
 
-      console.error("[GET ITEMS Metadata State] Success ", res);
       dispatch({ type: dispatchType, payload: res.data });
     } catch (error) {
-      console.error("[GET ITEMS Metadata State] Error ", error);
       dispatch({
         type: dispatchError,
         // payload: error.response.data[`${errorName}`],
@@ -208,7 +206,7 @@ const MetadataState = (props) => {
     //setCurrentItemToNull();
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     try {
@@ -218,15 +216,15 @@ const MetadataState = (props) => {
         config
       );
 
-      if (metadataType === "member") {
-        getItems(metadataType, getTypeReducer, dispatchError, "memberName");
-      } else if (metadataType === "debatetitle") {
-        getItems(metadataType, getTypeReducer, dispatchError, "debateTitle");
-      } else if (metadataType === "portfolio") {
+      if (metadataType === 'member') {
+        getItems(metadataType, getTypeReducer, dispatchError, 'memberName');
+      } else if (metadataType === 'debatetitle') {
+        getItems(metadataType, getTypeReducer, dispatchError, 'debateTitle');
+      } else if (metadataType === 'portfolio') {
         getItems(metadataType, getTypeReducer, dispatchError, errorName);
-      } else if (metadataType === "issues") {
+      } else if (metadataType === 'issues') {
         getItems(metadataType, getTypeReducer, dispatchError, errorName);
-      } else if (metadataType === "tags") {
+      } else if (metadataType === 'tags') {
         getItems(metadataType, getTypeReducer, dispatchError, errorName);
       }
 
@@ -252,7 +250,7 @@ const MetadataState = (props) => {
     setCurrentItemToNull();
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     try {
@@ -291,7 +289,7 @@ const MetadataState = (props) => {
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     try {

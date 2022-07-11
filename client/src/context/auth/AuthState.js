@@ -1,11 +1,11 @@
-import React, { useReducer } from "react";
+import React, { useReducer } from 'react';
 
-import axios from "axios";
+import axios from 'axios';
 
-import AuthContext from "./authContext";
-import authReducer from "./authReducer";
+import AuthContext from './authContext';
+import authReducer from './authReducer';
 
-import setAuthToken from "../../utils/setAuthToken";
+import setAuthToken from '../../utils/setAuthToken';
 
 import {
   REGISTER_SUCCESS,
@@ -16,11 +16,11 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-} from "../types";
+} from '../types';
 
 const AuthState = (props) => {
   const initialState = {
-    token: localStorage.getItem("token"),
+    token: localStorage.getItem('token'),
     isAuthenticated: false,
     user: null,
     loading: false,
@@ -38,11 +38,11 @@ const AuthState = (props) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     } else {
-      console.info("[DEBUG] from load user action the token dont exist");
+      console.info('[DEBUG] from load user action the token dont exist');
     }
 
     try {
-      const res = await axios.get("/api/users/current");
+      const res = await axios.get('/api/users/current');
 
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
@@ -55,12 +55,12 @@ const AuthState = (props) => {
   const register = async (formData) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
     try {
-      const res = await axios.post("/api/users/register", formData, config);
+      const res = await axios.post('/api/users/register', formData, config);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -79,25 +79,28 @@ const AuthState = (props) => {
   const login = async (formData) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
 
     try {
-      const res = await axios.post("/api/users/login", formData, config);
+      const res = await axios.post('/api/users/login', formData, config);
 
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,
       });
       //loadUser();
+      return res.data;
     } catch (err) {
-      // console.info("[DEBUG Login] ", err.response);
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: err.response.data,
-        //payload: err.response.data.msg,
-      });
+      // console.info('[DEBUG Login] ', JSON.stringify(err));
+      if (Object.keys(err).length !== 0) {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: err.response.data,
+          //payload: err.response.data.msg,
+        });
+      }
     }
   };
 

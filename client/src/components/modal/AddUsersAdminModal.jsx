@@ -20,6 +20,7 @@ const MetadataSectionModal = ({
   currentItem,
   onDelete,
   attribute,
+  setCurrentItemsNull,
   //  labelValues,
 }) => {
   const metadataContext = useContext(MetadataContext);
@@ -33,22 +34,14 @@ const MetadataSectionModal = ({
   } = metadataContext;
 
   const { buttonLoading, isModalOpen } = loading;
+  //  console.log("The Label Values passed from modal", labelValues);
+  //const placeholderValue = labelValues;
+  //console.log(
+  //  "The placeholderValue Values passed from modal",
+  //  placeholderValue
+  //);
 
-  useEffect(() => {
-    //  console.log("Use Effect Metadata Section Modal Called");
-    if (currentMetadataItem != null) {
-      setCurrentItem(currentMetadataItem);
-    } else {
-      setCurrentItem({
-        name_eng: '',
-        name_kan: '',
-        status: null,
-        id: null,
-        last_modified_time: null,
-        modified_user: null,
-      });
-    }
-  }, [currentMetadataItem]);
+  useEffect(() => {}, []);
 
   const modalplaceholderLabelValue = (metadatatype) => {
     if (metadatatype === 'speaker') {
@@ -66,6 +59,23 @@ const MetadataSectionModal = ({
     }
   };
 
+  // const placeholderValue = placeholderLabelValue(attribute);
+  //let { placeHolderEnglish, placeHolderKannada } = placeholderValue;
+
+  //console.log("placeholderValue", placeholderValue);
+
+  //let { placeHolderEnglish, placeHolderKannada } = placeholderValue;
+
+  // const buttonValueSubmit = (metadataType) => {
+  //   if (attribute === "speaker") {
+  //     return "Speaker";
+  //   } else if (attribute === "member") {
+  //     return "Member";
+  //   }
+  // };
+
+  //const buttonValueModal = buttonValueSubmit(attribute);
+
   const buttonValue = (currentMetadataItem, buttonLoading, attribute) => {
     if (currentMetadataItem && !buttonLoading) {
       return `Edit ${attribute}`;
@@ -79,13 +89,13 @@ const MetadataSectionModal = ({
   };
 
   const optionsStatus = [
-    { label: 'Not-Live', value: false },
-    { label: 'Live', value: true },
+    { label: 'Metadata', value: false },
+    { label: 'Admin', value: true },
   ];
 
   return (
     <Fragment>
-      <div className="modal fade" id="addDebateTitle-modal-metadata">
+      <div className="modal fade" id="admin-modal-metadata">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
@@ -95,6 +105,7 @@ const MetadataSectionModal = ({
                 className="close"
                 data-dismiss="modal"
                 aria-label="Close"
+                onClick={setCurrentItemsNull}
               >
                 <span aria-hidden="true">×</span>
               </button>
@@ -103,97 +114,80 @@ const MetadataSectionModal = ({
               <div className="row">
                 <TextFieldGroup
                   // placeholder={placeholderValue.placeHolderEnglish}
-                  placeholder="Debates Title's (English)"
-                  name="name_eng"
-                  value={currentItem.name_eng}
+                  placeholder="Name of the user"
+                  name="name"
                   onChange={onChange}
                   error={false}
-                  id="name_eng"
+                  id="name"
                   // labelText={placeholderValue.placeHolderEnglish}
-                  labelText="Debates Title's (English)"
+                  labelText="Name of the User"
                   formWidth="col-md"
                   required={true}
                 />
               </div>
               <TextFieldGroup
                 //placeholder={placeholderValue.placeHolderKannada}
-                placeholder="Debates Title's (Kannada)"
-                name="name_kan"
-                value={currentItem.name_kan}
+                placeholder="Enter the email"
+                name="email"
                 onChange={onChange}
                 error={false}
-                id="name_kan"
+                id="email"
                 //labelText={placeholderValue.placeHolderKannada}
-                labelText="Debates Title's (Kannada)"
+                labelText="Email"
                 formWidth="col-md"
                 required={true}
               />
-              <SelectListGroup
-                placeholder="Status"
-                name="status"
-                value={currentItem.status}
+              <TextFieldGroup
+                //placeholder={placeholderValue.placeHolderKannada}
+                placeholder="password"
+                name="password"
                 onChange={onChange}
                 error={false}
-                id="speakerStatus"
-                labelText="Status"
+                id="password"
+                //labelText={placeholderValue.placeHolderKannada}
+                labelText="Enter Password"
+                formWidth="col-md"
+                required={true}
+                type="password"
+              />
+              <TextFieldGroup
+                //placeholder={placeholderValue.placeHolderKannada}
+                placeholder="Password"
+                name="password1"
+                onChange={onChange}
+                error={false}
+                id="password1"
+                //labelText={placeholderValue.placeHolderKannada}
+                labelText="Re Enter Password"
+                formWidth="col-md"
+                required={true}
+                type="password"
+              />
+              <SelectListGroup
+                placeholder="Admin Status"
+                name="admin_status"
+                value="false"
+                onChange={onChange}
+                error={false}
+                id="admin_status"
+                labelText="Admin Status"
                 formWidth="col-6"
                 options={optionsStatus}
               />
-              {currentItem.last_modified_time && (
-                <TextFieldGroup
-                  placeholder=""
-                  name="lastModifiedAt"
-                  value={currentItem.last_modified_time}
-                  onChange={onChange}
-                  // error={errors.last_modified_time}
-                  id="lastmodifiedat"
-                  labelText="Last Modified At"
-                  formWidth="col-md"
-                  disabled="true"
-                />
-              )}
-
-              {currentItem.last_modified_time && (
-                <TextFieldGroup
-                  placeholder=""
-                  name="lastModifiedBy"
-                  value={currentItem.modified_user}
-                  onChange={onChange}
-                  //   error={errors.modified_user}
-                  id="lastmodifiedby"
-                  labelText="Last Modified By"
-                  formWidth="col-md"
-                  disabled="true"
-                />
-              )}
+              <TextFieldGroup
+                //placeholder={placeholderValue.placeHolderKannada}
+                placeholder="Enter Phonenumber"
+                name="phonenumber"
+                onChange={onChange}
+                error={false}
+                id="phonenumber"
+                //labelText={placeholderValue.placeHolderKannada}
+                labelText="Phone Number"
+                formWidth="col-md"
+                required={true}
+              />
             </div>
             <div className="justify-content-between">
-              {currentItem.last_modified_time ? (
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-dismiss="modal"
-                  onClick={onDelete}
-                  style={{
-                    margin: '10px',
-                  }}
-                >
-                  Delete
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                  //onClick={onDelete}
-                  style={{
-                    margin: '10px',
-                  }}
-                >
-                  Cancel
-                </button>
-              )}
-
               <input
                 type="submit"
                 className={
@@ -204,12 +198,7 @@ const MetadataSectionModal = ({
                 onClick={AddItem}
                 data-dismiss="modal"
                 //value={currentSpeaker ? "Edit Speaker" : "Add Speaker"}
-                value={buttonValue(
-                  currentMetadataItem,
-                  buttonLoading,
-                  'DebateTitle'
-                  //buttonValue
-                )}
+                value="Submit"
                 style={{
                   float: 'right',
                   margin: '10px',
@@ -226,19 +215,19 @@ const MetadataSectionModal = ({
   );
 };
 
-MetadataSectionModal.propTypes = {
-  modalTitle: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  //speaker: PropTypes.object.isRequired,
-  // currentSpeaker: PropTypes.object.isRequired,
-  loading: PropTypes.object.isRequired,
-  setLoading: PropTypes.func.isRequired,
-  AddItem: PropTypes.func.isRequired,
-  setCurrentItem: PropTypes.func.isRequired,
-  currentItem: PropTypes.object.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  attribute: PropTypes.string.isRequired,
-  //  labelValues: PropTypes.object.isRequired,
-};
+// MetadataSectionModal.propTypes = {
+//   modalTitle: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+//   //speaker: PropTypes.object.isRequired,
+//   // currentSpeaker: PropTypes.object.isRequired,
+//   loading: PropTypes.object.isRequired,
+//   setLoading: PropTypes.func.isRequired,
+//   AddItem: PropTypes.func.isRequired,
+//   setCurrentItem: PropTypes.func.isRequired,
+//   currentItem: PropTypes.object.isRequired,
+//   onDelete: PropTypes.func.isRequired,
+//   attribute: PropTypes.string.isRequired,
+//   //  labelValues: PropTypes.object.isRequired,
+// };
 
 export default MetadataSectionModal;

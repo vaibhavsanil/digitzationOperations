@@ -25,7 +25,7 @@ import {
   ADD_TAGS,
   GET_TAGS_ALL,
   DELETE_TAGS,
-} from "../types";
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -41,9 +41,6 @@ export default (state, action) => {
       };
 
     case DELETE_SPEAKER:
-      console.log(
-        `[DELETE SPEAKER] reducer called for action payload ${action.payload}`
-      );
       return {
         ...state,
         speakersItems: state.speakersItems.filter(
