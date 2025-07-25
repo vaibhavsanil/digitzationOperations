@@ -1,0 +1,61 @@
+{
+  "_index": "klaprod",
+  "_type": "_doc",
+  "_id": "5ff3493d5c355629ee8f0a36",
+  "_score": 1.0,
+  "_source": {
+    "bookId": 96,
+    "assemblyNumber": "13[2008-2013]",
+    "sessionNumber": "15[2012]",
+    "volumeNumber": "27[2]",
+    "partNumber": 0,
+    "numofpages": 778,
+    "placeSession": "belegavi",
+    "yearBook": 2012,
+    "datesSessions": ["10-12-2012"],
+    "status_of_books": "Book Live",
+    "bindingStatus": true,
+    "last_modified_time": "2020-12-24",
+    "remarksBook": "",
+    "status_metadata_book": false,
+    "sectionType": "part1",
+    "startPage": 26,
+    "endPage": 27,
+    "debate_title_subject_eng": "Unstarred Questions",
+    "debate_title_subject_kan": "ಚುಕ್ಕೆ ಗುರುತಿಲ್ಲದ ಪ್ರಶ್ನೆಗಳು",
+    "debate_subject_kan": "ಬೇಲೂರು ನಗರಕ್ಕೆ ಸರ್ಕಾರಿ ITI ಮಂಜೂರಾತಿ ಬಗ್ಗೆ",
+    "issues_section_eng": ["N/A"],
+    "issues_section_kan": ["N/A"],
+    "tags_array_eng": ["N/A"],
+    "tags_array_kan": ["N/A"],
+    "question_number": "334(429)",
+    "questioner_name_eng": "Rudresh Gowda Y N",
+    "questioner_name_kan": "ರುದ್ರೇಶ್ ಗೌಡ ವೈ ಎನ್",
+    "minister_name_eng": "B N Bache Gowda",
+    "minister_name_kan": "ಬಿ ಎನ್ ಬಚ್ಚೇಗೌಡ",
+    "minister_portfolio_eng": "Minister For Labour",
+    "minister_portfolio_kan": "ಕಾರ್ಮಿಕ ಸಚಿವರು",
+    "annexure_title": "N/A",
+    "annexure_start_page": 0,
+    "annexure_end_page": 0,
+    "annexure_status": false,
+    "annexure_modified_user": "12345",
+    "annexure_last_modified_time": null,
+    "debate_participants_eng": ["N/A"],
+    "debate_participants_kan": ["N/A"],
+    "sectional_modified_user": "N/A",
+    "sectional_modified_time": "2021-01-05",
+    "section_status": true,
+    "ocr_schema_section": [
+      {
+        "page_number": 26,
+        "ocr_text": "700 LEGISLATIVE ASSEMBLY ಆ) ಹಾಗಿದ್ದಲ್ಲಿ, ಅಲ್ಲಿ ಸಾಂಸ್ಕೃತಿಕ ಭವನ ಮತ್ತು ರಂಗ ಮಂದಿರವನ್ನು ಪ್ರಾರಂಭಿಸಲು ಸರ್ಕಾರ ಕ್ರಮ ಕೈಗೊಳ್ಳುವುದೇ; ಇ) ರಾಮನಗರ ಪಟ್ಟಣದಲ್ಲಿರುವ ಶ್ರೀ ಅರ್ಕೇಶ್ವರ ದೇವಸ್ಥಾನಕ್ಕೆ ಸೇರಿದ ಎರಡು ಖಾಲಿ ಜಾಗದ ಸ್ಥಳಗಳಲ್ಲಿ ಸಾಂಸ್ಕೃತಿಕ ಭವನ ಮತ್ತು ರಂಗ ಮಂದಿರವನ್ನು ನಿರ್ಮಿಸಲು ಸರ್ಕಾರ ಕ್ರಮ ಕೈಗೊಳ್ಳುವುದೇ; ಈ) ಹಾಗಿಲ್ಲದಿದ್ದಲ್ಲಿ ಇವುಗಳನ್ನು ನಿರ್ಮಿಸಲು ಸರ್ಕಾರಕ್ಕಿರುವ ತೊಂದರೆಗಳೇನು? ಶ್ರೀ ಗೋವಿಂದ ಎಂ.ಕಾರಜೋಳ (ಮಾನ್ಯ ಸಣ್ಣ ನೀರಾವರಿ ಹಾಗೂ ಕನ್ನಡ ಮತ್ತು ಸಂಸ್ಕೃತಿ ಸಚಿವರು) ಉತ್ತರ ಅ) ಹೌದು ಆ) ಜಿಲ್ಲಾಧಿಕಾರಿಗಳು, ರಾಮನಗರ ಜಿಲ್ಲೆ ಇವರಿಗೆ ಸಾಂಸ್ಕೃತಿಕ ಭವನ ಮತ್ತು ಜಿಲ್ಲಾ ಮಂದಿರ ನಿರ್ಮಿಸಲು ಸ್ಥಳವಕಾಶ ಮತ್ತು ಅಂದಾಜುವೆಚ್ಚದ ಬಗ್ಗೆ ಪ್ರಸ್ತಾವನೆ ಸಲ್ಲಿಸಲು ಕೋರಲಾಗಿದೆ. ಸೂಕ್ತ ಪ್ರಸ್ತಾವನೆ ಬಂದ ನಂತರ ಕೂಡಲೇ ಜಿಲ್ಲಾ ರಂಗಮಂದಿರ ನಿರ್ಮಾಣ ಮಾಡಲು ಅವಶ್ಯ ಅನುದಾನ ಬಿಡುಗಡೆ ಮಾಡಲಾಗುವುದು. ಇ) ಪ್ರಸ್ತಾವನೆ ಸರ್ಕಾರದ ಮುಂದಿರುವುದಿಲ್ಲ. ಈ) ಉದ್ಭವಿಸುವುದಿಲ್ಲ. ಸರ್ಕಾರಿ ಐ.ಟಿ.ಐ ಕಾಲೇಜು 334 (429) ಶ್ರೀ ರುದ್ರೇಶಗೌಡ.ವೈ.ಎನ್ (ಬೇಲೂರು) ಪ್ರಶ್ನೆ ಬೇಲೂರು ನಗರಕ್ಕೆ ಕಾಲೇಜು ಮಂಜೂರಾಗಿರುವುದು ನಿಜವೇ; ಆ) ಹಾಗಿದ್ದಲ್ಲಿ, ಈ ಕಾಲೇಜಿನ ಸ್ವಂತ ಕಟ್ಟಡ ನಿರ್ಮಾಣಕ್ಕೆ ಸರ್ಕಾರ ಕೈಗೊಂಡ ಕ್ರಮಗಳೇನು; ಇ) ಸ್ವಂತ ಕಟ್ಟಡಕ್ಕೆ ಯಾವಾಗ ಅನುದಾನ ಬಿಡುಗಡೆ ಮಾಡಲಾಗುವುದು? ಸರ್ಕಾರಿ ಐ.ಟಿ.ಐ "
+      },
+      {
+        "page_number": 27,
+        "ocr_text": "10TH DECEMBER 2012 701 ಶ್ರೀ ಬಿ.ಎನ್.ಬಚ್ಚೇಗೌಡ (ಮಾನ್ಯ ಕಾರ್ಮಿಕ ಸಚಿವರು) ಉತ್ತರ ಅ) ಹೌದು Yes ಆ) ಸಂಸ್ಥೆಯ ಸ್ವಂತ ಕಟ್ಟಡ ನಿರ್ಮಾಣದ ಸಲುವಾಗಿ ಬೇಲೂರು ತಾಲ್ಲೂಕು ಕಸಬಾ ಹೋಬಳಿ ಬಿಟ್ರವಳ್ಳಿ ಗ್ರಾಮದ ಸರ್ವೆ ನಂ:5ರಲ್ಲಿ 5-ಎಕ್ಕರೆ ಸರ್ಕಾರಿ ಜಮೀನು ಮಂಜೂರಾಗಿದೆ. ಅನುದಾನ ಲಭ್ಯತೆ ಆಧರಿಸಿ ಕಟ್ಟಡ ನಿರ್ಮಿಸಲು ಕ್ರಮ ತೆಗೆದುಕೊಳ್ಳಲಾಗುವುದು. 5-Acres of Government Land has been allotted at Bitravalli Village . of Kasaba hobli, Belur Taluk, for the construction of own building of the Institute. Action will be taken for construction based on availability of funds. ಇ) ಅನ್ವಯಿಸುವುದಿಲ್ಲ. Does not raise. ಕಟ್ಟಡ ಕಾರ್ಮಿಕರ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಕ್ರಮಗಳು 282 (425) ಶ್ರೀ ಹ್ಯಾರಿಸ್ ಎನ್.ಎ (ಶಾಂತಿನಗರ) ಪ್ರಶ್ನೆ ಅ) ರಾಜ್ಯದಲ್ಲಿ ಕಟ್ಟಡ ಕಾರ್ಮಿಕರುಗಳಿಗಾಗಿ ಸರ್ಕಾರ ವಿಶೇಷ ಅಭಿವೃದ್ಧಿ ಕಾರ್ಯಕ್ರಮಗಳನ್ನು ಜಾರಿಗೊಳಿಸಿದೆಯೇ; (ವಿವರ ಒದಗಿಸುವುದು) ಆ) ನೂತನ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಮಾಡುವವರಿಗೆ ಕಟ್ಟಡ ಕಾರ್ಮಿಕರ ಅಭಿವೃದ್ಧಿಗಾಗಿ ಸೆಸ್ ವಿಧಿಸುವ ಪದ್ಧತಿಯನ್ನು ಜಾರಿಗೊಳಿಸುತ್ತಿದ್ದು, ಆ ಮೂಲಕ ಇದುವರೆವಿಗೆ ಸಂಗ್ರಹಿಸಿದ ಸೆಸ್ ಹಣದ ಮೊತ್ತವೆಷ್ಟು; ಅದನ್ನು ಕಟ್ಟಡ ಕಾರ್ಮಿಕರ ಕಲ್ಯಾಣಕ್ಕೆ ಯಾವ ರೀತಿಯಲ್ಲಿ ಬಳಿಸಿಕೊಳ್ಳಲಾಗಿದೆ; ಇ) ಕಟ್ಟಡ ಕಾರ್ಮಿಕ ಕಲ್ಯಾಣ ಯೋಜನೆಗಳನ್ನು ಸಮರ್ಪಕವಾಗಿ ಜಾರಿಗೊಳಿಸಿ ಅನುಕೂಲ ಮಾಡಿಕೊಡುವಲ್ಲಿ ಸರ್ಕಾರ ಕೈಗೊಂಡ ಕ್ರಮಗಳೇನು; ಈ) ರಾಜ್ಯ ಮತ್ತು ಹೊರ ರಾಜ್ಯಗಳಿಂದ ಬರುವ ಕಟ್ಟಡ ಕಾರ್ಮಿಕರಿಗೆ ಮೂಲ ಸೌಕರ್ಯಗಳಾದ ಶೌಚಾಲಯಗಳು ಮತ್ತು ತಾತ್ಕಾಲಿಕ ವಸತಿ ವ್ಯವಸ್ಥೆ ಮಾಡಿ ಕೊಡಲು ಸರ್ಕಾರ ಕ್ರಮ ಜರುಗಿಸುವುದೆ? "
+      }
+    ],
+    "debate_section_date": "2012-12-10"
+  }
+}

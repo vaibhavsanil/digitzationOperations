@@ -10,22 +10,24 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "sdc-build": "NODE_ENV=production node server.js",
-    "sdc-build-pm2": "NODE_ENV=production pm2 start server.js"
+    "sdc-klaopsbuild-pm2": "NODE_ENV=production pm2 start --name klaops server.js",
+    "sdc-klcopsbuild-pm2": "NODE_ENV=production pm2 start --name klcops server.js"
   },
   "author": "Vaibhav Sanil",
   "license": "ISC",
   "dependencies": {
+    "@elastic/elasticsearch": "^8.13.1",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.2",
     "busboy": "^0.3.1",
     "config": "^3.3.3",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.10",
+    "express": "^4.19.2",
+    "mongoose": "^5.13.22",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "sweetalert2": "^10.8.1",
-    "sweetalert2-react-content": "^3.2.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "response-time": "^2.3.2",
     "validator": "^13.1.1"
   },
   "devDependencies": {
@@ -43,6 +45,18 @@
     "passport-jwt",
     "sweetalert2",
     "sweetalert2-react-content",
+    "validator"
+  ],
+  "bundleDependencies": [
+    "bcryptjs",
+    "body-parser",
+    "busboy",
+    "config",
+    "express",
+    "mongoose",
+    "nodemon",
+    "passport",
+    "passport-jwt",
     "validator"
   ]
 }

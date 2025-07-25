@@ -1,36 +1,36 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
-} from 'react-router-dom';
-import Header from './components/layout/Header';
-import Menu from './components/layout/Menu';
-import Content from './components/layout/Content';
-import Footer from './components/layout/Footer';
+} from "react-router-dom";
+import Header from "./components/layout/Header";
+import Menu from "./components/layout/Menu";
+import Content from "./components/layout/Content";
+import Footer from "./components/layout/Footer";
 
-import Login from './components/auth/Login-component';
-import Register from './components/auth/Register-Component';
-import BookIndex from './components/book/BookIndex';
-import MetadataIndex from './components/metadata/MetadataIndex.componenet';
-import { SearchTableNew } from './utils/SearchTableNew.component';
-import AdminPage from './components/Admin/AdminLandingPage';
+import Login from "./components/auth/Login-component";
+import Register from "./components/auth/Register-Component";
+import BookIndex from "./components/book/BookIndex";
+import MetadataIndex from "./components/metadata/MetadataIndex.componenet";
+import { SearchTableNew } from "./utils/SearchTableNew.component";
+import AdminPage from "./components/Admin/AdminLandingPage";
 
 //Importing Private Route
-import PrivateRoute from './components/routing/PrivateRoute';
-import CheckLogin from './components/routing/CheckLogin';
+import PrivateRoute from "./components/routing/PrivateRoute";
+import CheckLogin from "./components/routing/CheckLogin";
 
 // Import Set Auth Token
-import setAuthToken from './utils/setAuthToken';
+import setAuthToken from "./utils/setAuthToken";
 
 // Import Context API State
 
-import BookState from './context/book/BookState';
-import AuthState from './context/auth/AuthState';
-import AlertState from './context/alert/AlertState';
-import MetadataState from './context/metadata/MetadataState';
-import AdminState from './context/admin/AdminState';
+import BookState from "./context/book/BookState";
+import AuthState from "./context/auth/AuthState";
+import AlertState from "./context/alert/AlertState";
+import MetadataState from "./context/metadata/MetadataState";
+import AdminState from "./context/admin/AdminState";
 
 // Set Auth Context
 
@@ -58,25 +58,25 @@ function App() {
                   <div className="wrapper">
                     <PrivateRoute
                       path={[
-                        '/dashboard',
-                        '/bookindex/:id',
+                        "/dashboard",
+                        "/bookindex/:id",
 
-                        '/metadata',
-                        '/tabledemo',
-                        '/admin',
-                        '/reports',
+                        "/metadata",
+                        "/tabledemo",
+                        "/admin",
+                        "/reports",
                       ]}
                       component={Header}
                     />
                     <PrivateRoute
                       path={[
-                        '/dashboard',
-                        '/bookindex/:id',
+                        "/dashboard",
+                        "/bookindex/:id",
 
-                        '/metadata',
-                        '/tabledemo',
-                        '/admin',
-                        '/reports',
+                        "/metadata",
+                        "/tabledemo",
+                        "/admin",
+                        "/reports",
                       ]}
                       component={Menu}
                     />
@@ -122,13 +122,13 @@ function App() {
                     </Switch>
                     <PrivateRoute
                       path={[
-                        '/dashboard',
-                        '/bookindex/:id',
+                        "/dashboard",
+                        "/bookindex/:id",
 
-                        '/metadata',
-                        '/tabledemo',
-                        '/admin',
-                        '/reports',
+                        "/metadata",
+                        "/tabledemo",
+                        "/admin",
+                        "/reports",
                       ]}
                       component={Footer}
                     />

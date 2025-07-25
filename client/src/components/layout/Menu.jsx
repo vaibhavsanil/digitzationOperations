@@ -1,9 +1,9 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
 
-import { CUSTOMER } from '../../constants/index';
+import { CUSTOMER } from "../../constants/index";
 
 const Menu = () => {
   const authContext = useContext(AuthContext);
@@ -24,7 +24,7 @@ const Menu = () => {
   // https://stackoverflow.com/questions/18023493/bootstrap-dropdown-sub-menu-missing?rq=1
   // https://stackoverflow.com/questions/43370176/set-loading-state-before-and-after-an-action-in-a-react-class-component
   return (
-    Object.keys(userState).length !== 0 && (
+    userState && (
       <aside className="main-sidebar sidebar-dark-primary elevation-4">
         {/* Brand Logo */}
         <Link to="/dashboard" className="brand-link">
@@ -35,8 +35,8 @@ const Menu = () => {
         style={{ opacity: "0.8" }}
       /> */}
           <span className="brand-text font-weight-light">
-            Legislature{' '}
-            {CUSTOMER === 'KLA' ? <span>Assembly</span> : <span>Council</span>}{' '}
+            Legislature{" "}
+            {CUSTOMER === "KLA" ? <span>Assembly</span> : <span>Council</span>}{" "}
             Ops
           </span>
         </Link>
@@ -54,7 +54,7 @@ const Menu = () => {
             </div>
             <div className="info">
               <a href="#" className="d-block">
-                {user ? user.name : 'Vaibhav'}
+                {user ? user.name : "Vaibhav"}
                 {/* Vaibhav Sanil */}
               </a>
             </div>
@@ -104,7 +104,7 @@ const Menu = () => {
                     <span className="badge badge-info right">6</span>
                   </p>
                 </Link>
-                <ul className="nav nav-treeview" style={{ display: 'block' }}>
+                <ul className="nav nav-treeview" style={{ display: "block" }}>
                   <li className="nav-item">
                     <Link to="/dashboard" className="nav-link">
                       <i className="far fa-circle nav-icon" />
@@ -117,7 +117,9 @@ const Menu = () => {
                   <p>ADD/EDIT BOOK</p>
                 </Link>
               </li> */}
-                  {userState.admin_status && (
+                  {!userState.admin_status ? (
+                    ""
+                  ) : (
                     <>
                       <li className="nav-item">
                         <Link to="/metadata" className="nav-link">
@@ -275,5 +277,5 @@ const Menu = () => {
     )
   );
 };
-
+// Object.keys(userState).length !== 0
 export default Menu;

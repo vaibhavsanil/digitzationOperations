@@ -17,6 +17,8 @@ import {
   REGISTER_ADMIN_SUCCESS,
   GET_USER_LOGS,
   REMOVE_USER_LOGS,
+  GET_STATS,
+  REMOVE_STATS,
 } from '../types';
 
 const AdminState = (props) => {
@@ -25,9 +27,30 @@ const AdminState = (props) => {
     currentUser: {},
     logData: [],
     errors: {},
+    stats: {},
   };
 
   const [state, dispatch] = useReducer(AdminReducer, initialState);
+
+  // Get Stats
+  const getStats = async () => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.get('api/stats/all');
+
+      dispatch({ type: GET_STATS, payload: res.data });
+    } catch (error) {
+      dispatch({ type: ADD_USER_ERROR, payload: error.response.data });
+    }
+  };
+
+  const removeStats = async () => {
+    dispatch({ type: REMOVE_STATS });
+  };
 
   // Auth Actions
 
@@ -130,6 +153,7 @@ const AdminState = (props) => {
         logData: state.logData,
         currentUser: state.currentUser,
         errors: state.errors,
+        stats: state.stats,
 
         getUsersAdmin,
         registerUser,
@@ -137,6 +161,8 @@ const AdminState = (props) => {
         clearErrors,
         getUsersLogs,
         removeUsersLogs,
+        getStats,
+        removeStats,
       }}
     >
       {props.children}

@@ -8,4 +8,8 @@ module.exports = {
     "mongodb://vaibhavsanil:Kalavathi5@kla-ops-shard-00-00.kkm6g.mongodb.net:27017,kla-ops-shard-00-01.kkm6g.mongodb.net:27017,kla-ops-shard-00-02.kkm6g.mongodb.net:27017/kla-ops?ssl=true&replicaSet=atlas-129uy5-shard-0&authSource=admin&retryWrites=true&w=majority",
   localMongoURI_KLA_OPS: "mongodb://127.0.0.1:27017/kla_ops_prod",
   localMongoURI_KLC_OPS: "mongodb://127.0.0.1:27017/klc_ops_prod",
+  el_local: "http://localhost:9200",
+  es_prod: "http://localhost:5000",
+  es_user: "elastic",
+  es_pass: "SiimsAdmin@123",
 };

@@ -64,6 +64,9 @@ router.post(
     SectionalMetadata.findOne({ _id: req.body._id }).then((sectionmetadata) => {
       if (sectionmetadata) {
         // Update the contents
+        // If From To Pages Numbers have changed fetch the pdf create new section & push to the file server
+
+        // Modify the updated field in ES
 
         SectionalMetadata.findOneAndUpdate(
           { _id: req.body._id },

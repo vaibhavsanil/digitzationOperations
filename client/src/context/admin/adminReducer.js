@@ -8,6 +8,8 @@ import {
   REGISTER_ADMIN_SUCCESS,
   GET_USER_LOGS,
   REMOVE_USER_LOGS,
+  GET_STATS,
+  REMOVE_STATS,
 } from '../types';
 
 export default (state, action) => {
@@ -59,6 +61,18 @@ export default (state, action) => {
       return {
         ...state,
         logData: [],
+      };
+
+    case GET_STATS:
+      return {
+        ...state,
+        stats: action.payload,
+      };
+
+    case REMOVE_STATS:
+      return {
+        ...state,
+        stats: {},
       };
 
     default:

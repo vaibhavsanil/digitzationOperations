@@ -1,13 +1,14 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react';
-import swal from 'sweetalert';
+import React, { Fragment, useContext, useState, useEffect } from "react";
+import swal from "sweetalert";
 
 // Import Book Context
 
-import BookContext from '../../context/book/bookContext';
-import AuthContext from '../../context/auth/authContext';
+import BookContext from "../../context/book/bookContext";
+import AuthContext from "../../context/auth/authContext";
+import AdminContext from "../../context/admin/adminContext";
 
-import TableDashboardItems from '../dashboard/TableDashBoardItems';
-import { SearchTableNewDashboard } from '../../utils/SearchTableDashboardNew';
+import TableDashboardItems from "../dashboard/TableDashBoardItems";
+import { SearchTableNewDashboard } from "../../utils/SearchTableDashboardNew";
 
 import {
   modalHeaderBackColour,
@@ -19,17 +20,18 @@ import {
   bookStateObject,
   removeclassbody,
   addclassbody,
-} from '../../constants/index';
+} from "../../constants/index";
 
-import AddBookModal from '../modal/AddBookModal.Component';
+import AddBookModal from "../modal/AddBookModal.Component";
 
 const TableDashboard = () => {
   useEffect(() => {
-    removeclassbody('login-page');
-    addclassbody('sidebar-mini');
+    removeclassbody("login-page");
+    addclassbody("sidebar-mini");
   }, []);
   const bookContext = useContext(BookContext);
   const authContext = useContext(AuthContext);
+  const adminContext = useContext(AdminContext);
 
   const {
     bookSummaryTable,
@@ -39,10 +41,13 @@ const TableDashboard = () => {
     getBookStruct,
   } = bookContext;
 
+  const { getStats, stats, removeStats } = adminContext;
+
   const { token } = authContext;
 
   useEffect(() => {
     getBookStruct();
+    getStats();
   }, []);
 
   const [bookStruct, setBookStruct] = useState(bookStateObject);
@@ -64,9 +69,9 @@ const TableDashboard = () => {
 
   const onChangeDate = (e) => {
     let dateVar = e.target.value;
-    let dateVarRes = dateVar.split(',');
+    let dateVarRes = dateVar.split(",");
 
-    console.info('[DEBUG] change date in ADD Book Action', dateVarRes);
+    // console.info('[DEBUG] change date in ADD Book Action', dateVarRes);
 
     setBookStruct({
       ...bookStruct,
@@ -83,82 +88,82 @@ const TableDashboard = () => {
     // delete currentItem["_id"];
 
     addBookStruct(bookStruct).then((responseMsg) => {
-      if (responseMsg === 'success') {
+      if (responseMsg === "success") {
         initSpeakerState();
         swal(
-          'Good job!',
-          'The Book Has Been Successfully Added !!!',
-          'success'
+          "Good job!",
+          "The Book Has Been Successfully Added !!!",
+          "success"
         );
       } else {
         initSpeakerState();
         swal(
-          'Awww Snap !!!',
-          'The Book was not added successfully!!! Please try again',
-          'error'
+          "Awww Snap !!!",
+          "The Book was not added successfully!!! Please try again",
+          "error"
         );
       }
     });
   };
 
   const COLUMNS_CUSTOMER = (customer) =>
-    customer === 'KLA'
+    customer === "KLA"
       ? [
           {
-            Header: 'Book Id',
-            Footer: 'Book Id',
-            accessor: 'bookId',
-            sticky: 'left',
+            Header: "Book Id",
+            Footer: "Book Id",
+            accessor: "bookId",
+            sticky: "left",
           },
 
           {
-            Header: 'Assembly Number',
-            Footer: 'Assembly Number',
-            accessor: 'assembly_number',
-            sticky: 'left',
+            Header: "Assembly Number",
+            Footer: "Assembly Number",
+            accessor: "assembly_number",
+            sticky: "left",
           },
           {
-            Header: 'Session Number',
-            Footer: 'Session Number',
-            accessor: 'session_number',
-            sticky: 'left',
+            Header: "Session Number",
+            Footer: "Session Number",
+            accessor: "session_number",
+            sticky: "left",
           },
           {
-            Header: 'Part Number',
-            Footer: 'Part Number',
-            accessor: 'part_number',
+            Header: "Part Number",
+            Footer: "Part Number",
+            accessor: "part_number",
             //   Cell: ({ value }) => {
             //     return getTableItems(value);
             //   },
           },
           {
-            Header: 'Number of Pages',
-            Footer: 'Number of Pages',
-            accessor: 'numofpages',
+            Header: "Number of Pages",
+            Footer: "Number of Pages",
+            accessor: "numofpages",
             //   Cell: ({ value }) => {
             //     return getTableItems(value);
             //   },
           },
           {
-            Header: 'Book Status',
-            Footer: 'Book Status',
-            accessor: 'status_of_books',
+            Header: "Book Status",
+            Footer: "Book Status",
+            accessor: "status_of_books",
             Cell: ({ value }) => {
               return getStatusBadge(value);
             },
           },
           {
-            Header: 'Binding Status',
-            Footer: 'Binding Status',
-            accessor: 'binding_status',
+            Header: "Binding Status",
+            Footer: "Binding Status",
+            accessor: "binding_status",
             Cell: ({ value }) => {
               return getBindedBadge(value);
             },
           },
           {
-            Header: 'Actions',
-            Footer: 'Actions',
-            accessor: '_id',
+            Header: "Actions",
+            Footer: "Actions",
+            accessor: "_id",
             Cell: ({ value }) => {
               return getTableActionItems(value);
             },
@@ -166,52 +171,52 @@ const TableDashboard = () => {
         ]
       : [
           {
-            Header: 'Book Id',
-            Footer: 'Book Id',
-            accessor: 'bookId',
-            sticky: 'left',
+            Header: "Book Id",
+            Footer: "Book Id",
+            accessor: "bookId",
+            sticky: "left",
           },
           {
-            Header: 'Session Number',
-            Footer: 'Session Number',
-            accessor: 'session_number',
+            Header: "Session Number",
+            Footer: "Session Number",
+            accessor: "session_number",
           },
           {
-            Header: 'Part Number',
-            Footer: 'Part Number',
-            accessor: 'part_number',
+            Header: "Part Number",
+            Footer: "Part Number",
+            accessor: "part_number",
             //   Cell: ({ value }) => {
             //     return getTableItems(value);
             //   },
           },
           {
-            Header: 'Number of Pages',
-            Footer: 'Number of Pages',
-            accessor: 'numofpages',
+            Header: "Number of Pages",
+            Footer: "Number of Pages",
+            accessor: "numofpages",
             //   Cell: ({ value }) => {
             //     return getTableItems(value);
             //   },
           },
           {
-            Header: 'Book Status',
-            Footer: 'Book Status',
-            accessor: 'status_of_books',
+            Header: "Book Status",
+            Footer: "Book Status",
+            accessor: "status_of_books",
             Cell: ({ value }) => {
               return getStatusBadge(value);
             },
           },
           {
-            Header: 'Binding Status',
-            Footer: 'Binding Status',
-            accessor: 'binding_status',
+            Header: "Binding Status",
+            Footer: "Binding Status",
+            accessor: "binding_status",
             Cell: ({ value }) => {
               return getBindedBadge(value);
             },
           },
           {
-            Header: 'Actions',
-            Footer: 'Actions',
-            accessor: '_id',
+            Header: "Actions",
+            Footer: "Actions",
+            accessor: "_id",
             Cell: ({ value }) => {
               return getTableActionItems(value);
             },
@@ -229,7 +234,7 @@ const TableDashboard = () => {
               {/* small box */}
               <div className="small-box bg-info">
                 <div className="inner">
-                  <h3>335</h3>
+                  <h3>449</h3>
                   <p>Number of Books Completed</p>
                 </div>
                 <div className="icon">
@@ -245,7 +250,7 @@ const TableDashboard = () => {
               {/* small box */}
               <div className="small-box bg-success">
                 <div className="inner">
-                  <h3>2,22,879</h3>
+                  <h3>2,66,790</h3>
                   <p>OCR'ed Pages</p>
                 </div>
                 <div className="icon">
@@ -261,8 +266,13 @@ const TableDashboard = () => {
               {/* small box */}
               <div className="small-box bg-warning">
                 <div className="inner">
-                  <h3>335</h3>
-                  <p>Book's Binded</p>
+                  {!stats.sectionCount ? (
+                    <h4>Loading...</h4>
+                  ) : (
+                    <h3>{stats.sectionCount}</h3>
+                  )}
+
+                  <p>Metadata Sections</p>
                 </div>
                 <div className="icon">
                   <i className="ion ion-checkmark-circled" />

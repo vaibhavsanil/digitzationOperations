@@ -1,0 +1,45 @@
+{
+  "book_id": "bookId",
+  "section_type": "sectionType",
+  "start_page": "startPage",
+  "end_page": "endPage",
+  "assembly_number": "assemblyNumber",
+  "session_number": "sessionNumber",
+  "volume_number": "volumeNumber",
+  "part_number": "partNumber",
+  "numofpages": "numofpages",
+  "place_session": "placeSession",
+  "year_book": "yearBook",
+  "dates_session": "datesSessions",
+  "status_of_books": "status_of_books",
+  "binding_status": "bindingStatus",
+
+  "last_modified_time": "last_modified_time",
+  "remarksBook": "remarksBook",
+  "status_metadata_book": "status_metadata_book",
+
+  "debate_title_subject": [
+    "debate_title_subject_eng",
+    "debate_title_subject_kan"
+  ],
+
+  "debate_subject_kan": "debate_subject_kan",
+  "issues_section": ["issues_section_eng", "issues_section_kan"],
+
+  "question_number": "question_number",
+  "questioner_name": ["questioner_name_eng", "questioner_name_kan"],
+  "minister_name": ["minister_name_eng", "minister_name_kan"],
+  "minister_portfolio": ["minister_portfolio_eng", "minister_portfolio_kan"],
+  "annexure": [
+    "annexure_title",
+    "annexure_start_page",
+    "annexure_end_page",
+    "annexure_status",
+    "annexure_modified_user",
+    "annexure_last_modified_time"
+  ],
+  "debate_participants": ["debate_participants_eng", "debate_participants_kan"],
+  "modified_time": "sectional_modified_time",
+  "modified_user": "sectional_modified_user",
+  "status": "section_status"
+}

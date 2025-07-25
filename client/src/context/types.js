@@ -112,3 +112,8 @@ export const REGISTER_ADMIN_SUCCESS = 'REGISTER_ADMIN_SUCCESS';
 
 export const GET_USER_LOGS = 'GET_USER_LOGS';
 export const REMOVE_USER_LOGS = 'REMOVE_USER_LOGS';
+
+// Get Stats
+
+export const GET_STATS = 'GET_STATS';
+export const REMOVE_STATS = 'REMOVE_STATS';
