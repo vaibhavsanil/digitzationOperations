@@ -18,6 +18,27 @@ import {
   LOGOUT,
 } from "../types";
 
+import {
+  REACT_BACKEND_NODE_KLA_DEV,
+  REACT_BACKEND_NODE_KLA_PROD,
+  REACT_BACKEND_NODE_KLC_DEV,
+  REACT_BACKEND_NODE_KLC_PROD,
+  CUSTOMER,
+} from "../../constants/index";
+
+const fetch_url_kla =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLA_DEV : REACT_BACKEND_NODE_KLA_PROD;
+const fetch_url_klc =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLC_DEV : REACT_BACKEND_NODE_KLC_PROD;
+
+const fetch_url = CUSTOMER === "KLA" ? fetch_url_kla : fetch_url_klc;
+const axiosInstance = axios.create({
+  baseURL: fetch_url,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
@@ -42,7 +63,7 @@ const AuthState = (props) => {
     }
 
     try {
-      const res = await axios.get("/api/users/current");
+      const res = await axiosInstance.get("/api/users/current");
 
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
@@ -60,7 +81,11 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post("/api/users/register", formData, config);
+      const res = await axiosInstance.post(
+        "/api/users/register",
+        formData,
+        config
+      );
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -84,7 +109,11 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axios.post("/api/users/login", formData, config);
+      const res = await axiosInstance.post(
+        "/api/users/login",
+        formData,
+        config
+      );
 
       dispatch({
         type: LOGIN_SUCCESS,

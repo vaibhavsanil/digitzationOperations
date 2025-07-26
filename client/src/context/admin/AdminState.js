@@ -1,11 +1,11 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
-import AdminContext from './adminContext';
-import AdminReducer from './adminReducer';
+import AdminContext from "./adminContext";
+import AdminReducer from "./adminReducer";
 
-import setAuthToken from '../../utils/setAuthToken';
+import setAuthToken from "../../utils/setAuthToken";
 
 import {
   GET_ADMIN_USERS,
@@ -19,7 +19,22 @@ import {
   REMOVE_USER_LOGS,
   GET_STATS,
   REMOVE_STATS,
-} from '../types';
+} from "../types";
+
+const fetch_url_kla =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLA_DEV : REACT_BACKEND_NODE_KLA_PROD;
+const fetch_url_klc =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLC_DEV : REACT_BACKEND_NODE_KLC_PROD;
+
+const fetch_url = CUSTOMER === "KLA" ? fetch_url_kla : fetch_url_klc;
+
+const axiosInstance = axios.create({
+  baseURL: fetch_url,
+  headers: {
+    "Content-Type": "application/json",
+    "x-auth-token": localStorage.token,
+  },
+});
 
 const AdminState = (props) => {
   const initialState = {
@@ -36,11 +51,11 @@ const AdminState = (props) => {
   const getStats = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     try {
-      const res = await axios.get('api/stats/all');
+      const res = await axiosInstance.get("api/stats/all");
 
       dispatch({ type: GET_STATS, payload: res.data });
     } catch (error) {
@@ -59,12 +74,12 @@ const AdminState = (props) => {
   const getUsersAdmin = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.get('api/users/getusers');
+      const res = await axiosInstance.get("api/users/getusers");
 
       dispatch({ type: GET_ADMIN_USERS, payload: res.data });
     } catch (err) {
@@ -77,12 +92,16 @@ const AdminState = (props) => {
   const registerUser = async (formData) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.post('/api/users/register', formData, config);
+      const res = await axiosInstance.post(
+        "/api/users/register",
+        formData,
+        config
+      );
 
       // dispatch({
       //   type: REGISTER_ADMIN_SUCCESS,
@@ -105,12 +124,12 @@ const AdminState = (props) => {
   const deleteUser = async (id) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.delete(`/api/users/${id}`, config);
+      const res = await axiosInstance.delete(`/api/users/${id}`, config);
       getUsersAdmin();
       return res;
     } catch (err) {
@@ -124,12 +143,12 @@ const AdminState = (props) => {
   const getUsersLogs = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.get('api/users/logs');
+      const res = await axiosInstance.get("api/users/logs");
 
       dispatch({ type: GET_USER_LOGS, payload: res.data });
     } catch (err) {

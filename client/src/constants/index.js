@@ -5,11 +5,21 @@ import { Link } from "react-router-dom";
 // GLOBAL CONSTANTS
 export const CUSTOMER = "KLA";
 
+// APP_ENV
+export const APP_ENV = "DEV"; // Can be DEV or PROD
+
 // Classes
 export const CUSTOMER_NAME_COLOUR = "#46A049";
 export const LOGIN_CLASS_BODY = "login-page";
 
 export const MODAL_HEADER_KLA = "#46A049";
+
+// Backend
+
+export const REACT_BACKEND_NODE_KLA_DEV = "http://localhost:9001/";
+export const REACT_BACKEND_NODE_KLA_PROD = "http://localhost:9001/";
+export const REACT_BACKEND_NODE_KLC_DEV = "http://localhost:9201/";
+export const REACT_BACKEND_NODE_KLC_PROD = "http://localhost:9201/";
 
 //Metadata Table Constants
 

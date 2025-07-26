@@ -34,9 +34,9 @@ import AdminState from "./context/admin/AdminState";
 
 // Set Auth Context
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
+// if (localStorage.token) {
+//   setAuthToken(localStorage.token);
+// }
 
 function App() {
   return (

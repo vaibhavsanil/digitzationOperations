@@ -23,6 +23,29 @@ import {
   CLEAR_CURRENT_METADATA_SECTION,
 } from "../types";
 
+import {
+  REACT_BACKEND_NODE_KLA_DEV,
+  REACT_BACKEND_NODE_KLA_PROD,
+  REACT_BACKEND_NODE_KLC_DEV,
+  REACT_BACKEND_NODE_KLC_PROD,
+  CUSTOMER,
+} from "../../constants/index";
+
+const fetch_url_kla =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLA_DEV : REACT_BACKEND_NODE_KLA_PROD;
+const fetch_url_klc =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLC_DEV : REACT_BACKEND_NODE_KLC_PROD;
+
+const fetch_url = CUSTOMER === "KLA" ? fetch_url_kla : fetch_url_klc;
+
+const axiosInstance = axios.create({
+  baseURL: fetch_url,
+  headers: {
+    "Content-Type": "application/json",
+    "x-auth-token": localStorage.token,
+  },
+});
+
 const BookState = (props) => {
   const initialState = {
     // bookSummaryTable: [
@@ -160,7 +183,6 @@ const BookState = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-
     };
 
     // const getDispatchType = (metadatatype) => {
@@ -168,7 +190,7 @@ const BookState = (props) => {
     // };
 
     try {
-      const res = await axios.get("/api/structbook/all", config);
+      const res = await axiosInstance.get("/api/structbook/all", config);
 
       // console.log("[DEBUG-GETBOOK] ", res);
 
@@ -197,7 +219,7 @@ const BookState = (props) => {
     // };
 
     try {
-      const res = await axios.post("/api/structbook/new", bookStruct, config);
+      const res = await axiosInstance.post("/api/structbook/new", bookStruct);
 
       getBookStruct();
       return res.data.msg;
@@ -236,7 +258,7 @@ const BookState = (props) => {
     };
 
     try {
-      const res = await axios.get(`/api/structbook/${id}`, config);
+      const res = await axiosInstance.get(`/api/structbook/${id}`);
 
       dispatch({
         type: GET_CURRENT_BOOK_STRUCTURE,
@@ -265,7 +287,7 @@ const BookState = (props) => {
     };
 
     try {
-      const res = await axios.get(`/api/annexure/new/${bookId}`, config);
+      const res = await axiosInstance.get(`/api/annexure/new/${bookId}`);
 
       dispatch({
         type: GET_ANNEXURE_FOR_BOOK,
@@ -291,10 +313,9 @@ const BookState = (props) => {
     // };
 
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `/api/annexure/new/${bookId}`,
-        annexure,
-        config
+        annexure
       );
 
       getAnnexureItems(bookId);
@@ -320,7 +341,7 @@ const BookState = (props) => {
     };
 
     try {
-      const res = await axios.get(`/api/annexure/${annexureId}`, config);
+      const res = await axiosInstance.get(`/api/annexure/${annexureId}`);
 
       //getBookStruct();
       dispatch({
@@ -344,9 +365,8 @@ const BookState = (props) => {
     };
 
     try {
-      const res = await axios.delete(
-        `/api/annexure/${bookid}/${annexureid}`,
-        config
+      const res = await axiosInstance.delete(
+        `/api/annexure/${bookid}/${annexureid}`
       );
       dispatch({
         type: DELETE_ANNEXURE_ID,
@@ -382,7 +402,7 @@ const BookState = (props) => {
     // console.info("[DEBUG] from getMetadataItems value of bookid", bookId);
 
     try {
-      const res = await axios.get(`/api/sectionbook/get/${bookId}`, config);
+      const res = await axiosInstance.get(`/api/sectionbook/get/${bookId}`);
       // console.log("[DEBUG] get MetDataItem ", res.data);
       dispatch({
         type: GET_METADATA_FOR_BOOK,
@@ -407,7 +427,7 @@ const BookState = (props) => {
     //console.info("[DEBUG] Current Added Section", section);
 
     try {
-      const res = await axios.post(`/api/sectionbook/new`, section, config);
+      const res = await axiosInstance.post(`/api/sectionbook/new`, section);
 
       getMetadataItems(section.book_id);
       //Clear the current Annexure
@@ -436,7 +456,7 @@ const BookState = (props) => {
     };
 
     try {
-      const res = await axios.get(`/api/sectionbook/${sectionId}`, config);
+      const res = await axiosInstance.get(`/api/sectionbook/${sectionId}`);
 
       //getBookStruct();
       dispatch({
@@ -461,9 +481,8 @@ const BookState = (props) => {
     };
 
     try {
-      const res = await axios.delete(
-        `/api/sectionbook/${bookid}/${sectionid}`,
-        config
+      const res = await axiosInstance.delete(
+        `/api/sectionbook/${bookid}/${sectionid}`
       );
       dispatch({
         type: DELETE_METADATA_ID,
