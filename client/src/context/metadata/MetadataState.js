@@ -1,8 +1,8 @@
-import React, { useReducer } from 'react';
-import axios from 'axios';
+import React, { useReducer } from "react";
+import axios from "axios";
 
-import MetadataContext from './metadataContext';
-import metadataReducer from './metadataReducer';
+import MetadataContext from "./metadataContext";
+import metadataReducer from "./metadataReducer";
 
 import {
   ADD_SPEAKER,
@@ -14,7 +14,31 @@ import {
   SET_CURRENT_ITEM_NULL,
   GET_MEMBER_ALL,
   MEMBER_ERROR,
-} from '../types';
+} from "../types";
+
+import {
+  REACT_BACKEND_NODE_KLA_DEV,
+  REACT_BACKEND_NODE_KLA_PROD,
+  REACT_BACKEND_NODE_KLC_DEV,
+  REACT_BACKEND_NODE_KLC_PROD,
+  CUSTOMER,
+  APP_ENV,
+} from "../../constants/index";
+
+const fetch_url_kla =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLA_DEV : REACT_BACKEND_NODE_KLA_PROD;
+const fetch_url_klc =
+  APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLC_DEV : REACT_BACKEND_NODE_KLC_PROD;
+
+const fetch_url = CUSTOMER === "KLA" ? fetch_url_kla : fetch_url_klc;
+
+const axiosInstance = axios.create({
+  baseURL: fetch_url,
+  headers: {
+    "Content-Type": "application/json",
+    "x-auth-token": localStorage.getItem("token"),
+  },
+});
 
 const MetadataState = (props) => {
   const initialState = {
@@ -84,12 +108,13 @@ const MetadataState = (props) => {
   const getSpeakerItems = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     try {
-      const res = await axios.get('/api/metadata/speaker/all', config);
+      const res = await axiosInstance.get("/api/metadata/speaker/all", config);
 
       dispatch({ type: GET_SPEAKER_ALL, payload: res.data });
     } catch (error) {
@@ -105,12 +130,13 @@ const MetadataState = (props) => {
     //setCurrentItemToNull();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
     try {
-      const res = await axios.post(
-        '/api/metadata/speaker/new',
+      const res = await axiosInstance.post(
+        "/api/metadata/speaker/new",
         speaker,
         config
       );
@@ -172,7 +198,8 @@ const MetadataState = (props) => {
     // errorName = memberName
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -181,7 +208,10 @@ const MetadataState = (props) => {
     // };
 
     try {
-      const res = await axios.get(`/api/metadata/${metadataType}/all`, config);
+      const res = await axiosInstance.get(
+        `/api/metadata/${metadataType}/all`,
+        config
+      );
 
       dispatch({ type: dispatchType, payload: res.data });
     } catch (error) {
@@ -206,25 +236,26 @@ const MetadataState = (props) => {
     //setCurrentItemToNull();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `/api/metadata/${metadataType}/new`,
         addItemFromObject,
         config
       );
 
-      if (metadataType === 'member') {
-        getItems(metadataType, getTypeReducer, dispatchError, 'memberName');
-      } else if (metadataType === 'debatetitle') {
-        getItems(metadataType, getTypeReducer, dispatchError, 'debateTitle');
-      } else if (metadataType === 'portfolio') {
+      if (metadataType === "member") {
+        getItems(metadataType, getTypeReducer, dispatchError, "memberName");
+      } else if (metadataType === "debatetitle") {
+        getItems(metadataType, getTypeReducer, dispatchError, "debateTitle");
+      } else if (metadataType === "portfolio") {
         getItems(metadataType, getTypeReducer, dispatchError, errorName);
-      } else if (metadataType === 'issues') {
+      } else if (metadataType === "issues") {
         getItems(metadataType, getTypeReducer, dispatchError, errorName);
-      } else if (metadataType === 'tags') {
+      } else if (metadataType === "tags") {
         getItems(metadataType, getTypeReducer, dispatchError, errorName);
       }
 
@@ -250,11 +281,12 @@ const MetadataState = (props) => {
     setCurrentItemToNull();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
     try {
-      const res = await axios.get(
+      const res = await axiosInstance.get(
         `/api/metadata/${metadataType}/${id}/get`,
         config
       );
@@ -281,25 +313,26 @@ const MetadataState = (props) => {
     dispatchError,
     errorName
   ) => {
-    console.log(
-      `[DEBUG -DeleteDebateTitle] the value of metadata type is ${metadataType}`
-    );
-    console.log(`[DEBUG DELETE ITEM] /api/metadata/${metadataType}/${id}`);
+    // console.log(
+    //   `[DEBUG -DeleteDebateTitle] the value of metadata type is ${metadataType}`
+    // );
+    // console.log(`[DEBUG DELETE ITEM] /api/metadata/${metadataType}/${id}`);
     //Set the current speaker item to the current speaker item
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
     try {
-      const res = await axios.delete(
+      const res = await axiosInstance.delete(
         `/api/metadata/${metadataType}/${id}`,
         config
       );
 
-      console.log(`[DELETE ITEM] the value of res ${res.data}`);
-      console.log(`[DELETE ITEM] the dispatch type is ${dispatchType}`);
+      // console.log(`[DELETE ITEM] the value of res ${res.data}`);
+      // console.log(`[DELETE ITEM] the dispatch type is ${dispatchType}`);
 
       dispatch({
         type: dispatchType,

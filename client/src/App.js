@@ -33,10 +33,9 @@ import MetadataState from "./context/metadata/MetadataState";
 import AdminState from "./context/admin/AdminState";
 
 // Set Auth Context
+// setAuthToken(localStorage.token);
 
-// if (localStorage.token) {
-//   setAuthToken(localStorage.token);
-// }
+localStorage.removeItem("token");
 
 function App() {
   return (

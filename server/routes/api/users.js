@@ -1,33 +1,33 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
-const passport = require('passport');
-const auth = require('../../middleware/auth');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys");
+// const passport = require("passport");
+const auth = require("../../middleware/auth");
 
 //Load Input Validation
 
-const validateRegisterInput = require('../../validations/register');
-const validateLoginInput = require('../../validations/login');
+const validateRegisterInput = require("../../validations/register");
+const validateLoginInput = require("../../validations/login");
 
 //Load User Model
 
-const User = require('../../models/User');
-const Logs = require('../../models/Logs');
+const User = require("../../models/User");
+const Logs = require("../../models/Logs");
 
 // @route GET api/users/test
 // @desc  Tests user route
 // @access Public
 
-router.get('/test', (req, res) => res.json({ msg: 'Krishna Onde Jagadguru' }));
+router.get("/test", (req, res) => res.json({ msg: "Krishna Onde Jagadguru" }));
 
 // @route GET api/users/register
 // @desc  Register
 // @access Public
 
-router.post('/register', (req, res) => {
+router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   //Check Validation
@@ -49,7 +49,7 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
-      errors.email = 'Email Already exists';
+      errors.email = "Email Already exists";
       return res.status(400).json(errors);
     } else {
       const newUser = new User(userBody);
@@ -61,10 +61,10 @@ router.post('/register', (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then((user) => res.json({ msg: 'success', user }))
+            .then((user) => res.json({ msg: "success", user }))
             .catch((err) =>
               res.status(400).json({
-                msg: 'There is an internal error while saving user!!!',
+                msg: "There is an internal error while saving user!!!",
               })
             );
         });
@@ -76,7 +76,7 @@ router.post('/register', (req, res) => {
 // @route GET api/users/login        //
 // @desc  Login User / Returning JWT Token
 // @access Public
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
   //Check Validation
@@ -91,7 +91,7 @@ router.post('/login', (req, res) => {
   User.findOne({ email }).then((user) => {
     //Check for User
     if (!user) {
-      errors.email = 'User not found';
+      errors.email = "User not found";
       return res.status(404).json(errors);
     }
 
@@ -107,6 +107,8 @@ router.post('/login', (req, res) => {
           status_user: user.status_user,
         }; // Create JWT payload
 
+        console.log(`[DEBUG] [JWT] The payload is ${keys.secretOrKey}`);
+
         //Sign Token
         jwt.sign(
           payload,
@@ -120,7 +122,7 @@ router.post('/login', (req, res) => {
           }
         );
       } else {
-        errors.password = 'Password Incorrect';
+        errors.password = "Password Incorrect";
         return res.status(400).json(errors);
       }
     });
@@ -131,7 +133,7 @@ router.post('/login', (req, res) => {
 // @desc  UPDATE the user details
 // @access Private
 
-router.post('/userupdate/:userid', auth, (req, res) => {
+router.post("/userupdate/:userid", auth, (req, res) => {
   let userId = req.params.userid;
 });
 
@@ -139,7 +141,7 @@ router.post('/userupdate/:userid', auth, (req, res) => {
 // @desc  UPDATE the user details
 // @access Private
 
-router.delete('/:userid', auth, (req, res) => {
+router.delete("/:userid", auth, (req, res) => {
   let userId = req.params.userid;
 
   // Check of the User is admin
@@ -151,7 +153,7 @@ router.delete('/:userid', auth, (req, res) => {
         });
       } else {
         User.deleteOne({ _id: userId }).then((doc) => {
-          res.status(200).json({ msg: 'success' });
+          res.status(200).json({ msg: "success" });
         });
       }
     })
@@ -168,14 +170,14 @@ router.delete('/:userid', auth, (req, res) => {
 // @desc  Get all the user details
 // @access Private
 
-router.get('/getusers', auth, (req, res) => {
+router.get("/getusers", auth, (req, res) => {
   User.find({})
     .then((users) => {
       res.status(200).json(users); // Note  Send selected json response fields
     })
     .catch((err) => {
       const errors = {};
-      errors.message = 'The Users Not Found!!!';
+      errors.message = "The Users Not Found!!!";
       errors.err = err;
       res.status(400).json(errors);
     });
@@ -186,7 +188,7 @@ router.get('/getusers', auth, (req, res) => {
 // @access Private
 
 router.get(
-  '/current',
+  "/current",
   //passport.authenticate("jwt", { session: false }),
   auth,
   (req, res) => {
@@ -202,7 +204,7 @@ router.get(
 // @route GET api/users/logs
 // @desc  Getting all the logs of the user
 // @access Private
-router.get('/logs', auth, (req, res) => {
+router.get("/logs", auth, (req, res) => {
   Logs.find({})
     .sort({ logDate: -1 })
     .limit(100)
@@ -211,7 +213,7 @@ router.get('/logs', auth, (req, res) => {
     })
     .catch((err) => {
       const errors = {};
-      errors.message = 'The Users Not Found!!!';
+      errors.message = "The Users Not Found!!!";
       errors.err = err;
       res.status(400).json(errors);
     });

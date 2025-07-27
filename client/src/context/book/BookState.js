@@ -29,6 +29,7 @@ import {
   REACT_BACKEND_NODE_KLC_DEV,
   REACT_BACKEND_NODE_KLC_PROD,
   CUSTOMER,
+  APP_ENV,
 } from "../../constants/index";
 
 const fetch_url_kla =
@@ -42,7 +43,7 @@ const axiosInstance = axios.create({
   baseURL: fetch_url,
   headers: {
     "Content-Type": "application/json",
-    "x-auth-token": localStorage.token,
+    "x-auth-token": localStorage.getItem("token"),
   },
 });
 
@@ -182,6 +183,7 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -211,6 +213,7 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -219,7 +222,11 @@ const BookState = (props) => {
     // };
 
     try {
-      const res = await axiosInstance.post("/api/structbook/new", bookStruct);
+      const res = await axiosInstance.post(
+        "/api/structbook/new",
+        bookStruct,
+        config
+      );
 
       getBookStruct();
       return res.data.msg;
@@ -254,11 +261,12 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     try {
-      const res = await axiosInstance.get(`/api/structbook/${id}`);
+      const res = await axiosInstance.get(`/api/structbook/${id}`, config);
 
       dispatch({
         type: GET_CURRENT_BOOK_STRUCTURE,
@@ -283,6 +291,7 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -305,6 +314,7 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -315,7 +325,8 @@ const BookState = (props) => {
     try {
       const res = await axiosInstance.post(
         `/api/annexure/new/${bookId}`,
-        annexure
+        annexure,
+        config
       );
 
       getAnnexureItems(bookId);
@@ -337,11 +348,15 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     try {
-      const res = await axiosInstance.get(`/api/annexure/${annexureId}`);
+      const res = await axiosInstance.get(
+        `/api/annexure/${annexureId}`,
+        config
+      );
 
       //getBookStruct();
       dispatch({
@@ -361,12 +376,14 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     try {
       const res = await axiosInstance.delete(
-        `/api/annexure/${bookid}/${annexureid}`
+        `/api/annexure/${bookid}/${annexureid}`,
+        config
       );
       dispatch({
         type: DELETE_ANNEXURE_ID,
@@ -396,13 +413,17 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     // console.info("[DEBUG] from getMetadataItems value of bookid", bookId);
 
     try {
-      const res = await axiosInstance.get(`/api/sectionbook/get/${bookId}`);
+      const res = await axiosInstance.get(
+        `/api/sectionbook/get/${bookId}`,
+        config
+      );
       // console.log("[DEBUG] get MetDataItem ", res.data);
       dispatch({
         type: GET_METADATA_FOR_BOOK,
@@ -421,13 +442,18 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     //console.info("[DEBUG] Current Added Section", section);
 
     try {
-      const res = await axiosInstance.post(`/api/sectionbook/new`, section);
+      const res = await axiosInstance.post(
+        `/api/sectionbook/new`,
+        section,
+        config
+      );
 
       getMetadataItems(section.book_id);
       //Clear the current Annexure
@@ -452,11 +478,15 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     try {
-      const res = await axiosInstance.get(`/api/sectionbook/${sectionId}`);
+      const res = await axiosInstance.get(
+        `/api/sectionbook/${sectionId}`,
+        config
+      );
 
       //getBookStruct();
       dispatch({
@@ -477,12 +507,14 @@ const BookState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
     try {
       const res = await axiosInstance.delete(
-        `/api/sectionbook/${bookid}/${sectionid}`
+        `/api/sectionbook/${bookid}/${sectionid}`,
+        config
       );
       dispatch({
         type: DELETE_METADATA_ID,

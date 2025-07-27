@@ -1,20 +1,21 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
-const keys = require('./config/keys');
-const responseTime = require('response-time');
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+const keys = require("./config/keys");
+const responseTime = require("response-time");
+const cors = require("cors");
 //const bodyParser = require("body-parser");
 //const passport = require("passport");
 
 //Imported Routes
-const users = require('./routes/api/users');
-const structbook = require('./routes/api/structbook');
-const annexure = require('./routes/api/annexure');
-const sectionalbook = require('./routes/api/sectionbook');
-const addMember = require('./routes/api/addmember');
-const metadata = require('./routes/api/metadata');
-const stats = require('./routes/api/stats');
-const morgan = require('morgan');
+const users = require("./routes/api/users");
+const structbook = require("./routes/api/structbook");
+const annexure = require("./routes/api/annexure");
+const sectionalbook = require("./routes/api/sectionbook");
+const addMember = require("./routes/api/addmember");
+const metadata = require("./routes/api/metadata");
+const stats = require("./routes/api/stats");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -32,18 +33,20 @@ app.use(
     digits: 3,
   })
 );
-app.disable('x-powered-by');
-if (process.env.NODE_ENV === 'production') {
-  app.use(morgan('combined'));
+
+app.use(cors());
+app.disable("x-powered-by");
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
 } else {
-  app.use(morgan('tiny'));
+  app.use(morgan("tiny"));
 }
 
 mongoose.Promise = global.Promise;
 
 //DB Config
 //Check if the APP Variable connects to KLA or KLC
-if (keys.CUSTOMER === 'KLA') {
+if (keys.CUSTOMER === "KLA") {
   var db = keys.localMongoURI_KLA_OPS;
 } else {
   var db = keys.localMongoURI_KLC_OPS;
@@ -58,7 +61,7 @@ mongoose
   .then(() =>
     console.log(
       `MongoDB Connected to local ${
-        keys.CUSTOMER === 'KLA'
+        keys.CUSTOMER === "KLA"
           ? keys.localMongoURI_KLA_OPS
           : keys.localMongoURI_KLC_OPS
       }`
@@ -72,33 +75,33 @@ mongoose
 // Passport Config
 //require("./config/passport")(passport);
 
-app.get('/', (req, res) => res.send('Hello Vidhan DocsTracker!!!'));
+app.get("/", (req, res) => res.send("Hello Vidhan DocsTracker!!!"));
 
 // Use Routes
-app.use('/api/users', users); /// This route will be responsible for handling all the user related operation
-app.use('/api/structbook', structbook); // This route will be responsible for handling structural metadata of the book
-app.use('/api/annexure', annexure); // This route will be responsible for handling structural metadata of the book
-app.use('/api/sectionbook', sectionalbook); // This route will be responsible for handling structural metadata of the book
-app.use('/api/addmember', addMember); // This route will be responsible for handling structural metadata of the book
-app.use('/api/metadata', metadata); // This route will be reponsible for all the mischallenous metadata crud operations
-app.use('/api/stats', stats); // This route will provide all the stats
+app.use("/api/users", users); /// This route will be responsible for handling all the user related operation
+app.use("/api/structbook", structbook); // This route will be responsible for handling structural metadata of the book
+app.use("/api/annexure", annexure); // This route will be responsible for handling structural metadata of the book
+app.use("/api/sectionbook", sectionalbook); // This route will be responsible for handling structural metadata of the book
+app.use("/api/addmember", addMember); // This route will be responsible for handling structural metadata of the book
+app.use("/api/metadata", metadata); // This route will be reponsible for all the mischallenous metadata crud operations
+app.use("/api/stats", stats); // This route will provide all the stats
 //app.use("/api/sectionbook", sectionbook); // This route will be responsible for handling sectional metadata of the book
 //app.use("/api/metadata", metadata); // This route will be used for registering all metadata related operations
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // https://www.freecodecamp.org/news/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0/
   // https://stackoverflow.com/questions/53551717/couldnt-find-that-app-when-running-heroku-commands-in-console
   // https://blog.bitsrc.io/react-production-deployment-part-3-heroku-316319744885
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static(path.join(__dirname, "client/build")));
 
   // Handle React routing, return all requests to React app
-  app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
 
-if (keys.CUSTOMER === 'KLA') {
+if (keys.CUSTOMER === "KLA") {
   var port = process.env.PORT || 9001;
 } else {
   var port = process.env.PORT || 9201;

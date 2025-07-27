@@ -24,6 +24,7 @@ import {
   REACT_BACKEND_NODE_KLC_DEV,
   REACT_BACKEND_NODE_KLC_PROD,
   CUSTOMER,
+  APP_ENV,
 } from "../../constants/index";
 
 const fetch_url_kla =
@@ -36,6 +37,7 @@ const axiosInstance = axios.create({
   baseURL: fetch_url,
   headers: {
     "Content-Type": "application/json",
+    "x-auth-token": localStorage.getItem("token"),
   },
 });
 
@@ -56,14 +58,21 @@ const AuthState = (props) => {
 
   const loadUser = async () => {
     //@todo - load token into global headers
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    } else {
-      console.info("[DEBUG] from load user action the token dont exist");
-    }
+    // if (localStorage.token) {
+    //   setAuthToken(localStorage.token);
+    // } else {
+    //   console.info("[DEBUG] from load user action the token dont exist");
+    // }
+
+    let config = {
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
+      },
+    };
 
     try {
-      const res = await axiosInstance.get("/api/users/current");
+      const res = await axiosInstance.get("/api/users/current", config);
 
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
@@ -77,6 +86,7 @@ const AuthState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
 
@@ -109,11 +119,7 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await axiosInstance.post(
-        "/api/users/login",
-        formData,
-        config
-      );
+      const res = await axiosInstance.post("/api/users/login", formData);
 
       dispatch({
         type: LOGIN_SUCCESS,

@@ -49,6 +49,7 @@ const Login = (props) => {
       ""
     );
     if (localStorage.token) {
+      alert(`Local Storage Called \n ${localStorage.token}`);
       loadUser();
     }
 
@@ -57,7 +58,7 @@ const Login = (props) => {
       // // console.info("[DEBUG] Login-Component css ", items);
       // items[0].style.removeProperty("display");
       //items[0].style.display = "inline";
-      setAuthToken(localStorage.token);
+      // setAuthToken(localStorage.token);
       props.history.push("/dashboard");
       //sidebar-mini
     }

@@ -21,6 +21,15 @@ import {
   REMOVE_STATS,
 } from "../types";
 
+import {
+  APP_ENV,
+  REACT_BACKEND_NODE_KLA_DEV,
+  REACT_BACKEND_NODE_KLA_PROD,
+  REACT_BACKEND_NODE_KLC_DEV,
+  REACT_BACKEND_NODE_KLC_PROD,
+  CUSTOMER,
+} from "../../constants/index";
+
 const fetch_url_kla =
   APP_ENV === "DEV" ? REACT_BACKEND_NODE_KLA_DEV : REACT_BACKEND_NODE_KLA_PROD;
 const fetch_url_klc =
@@ -32,7 +41,7 @@ const axiosInstance = axios.create({
   baseURL: fetch_url,
   headers: {
     "Content-Type": "application/json",
-    "x-auth-token": localStorage.token,
+    "x-auth-token": localStorage.getItem("token"),
   },
 });
 
@@ -52,10 +61,11 @@ const AdminState = (props) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-auth-token": localStorage.getItem("token"),
       },
     };
     try {
-      const res = await axiosInstance.get("api/stats/all");
+      const res = await axiosInstance.get("api/stats/all", config);
 
       dispatch({ type: GET_STATS, payload: res.data });
     } catch (error) {
