@@ -27,6 +27,8 @@ const app = express();
 
 app.use(express.json({ extended: false }));
 
+// Get the Keys
+const { localMongoURI_KLA_OPS_LOCAL, localMongoURI_KLA_OPS_PROD } = keys;
 // Response Time
 app.use(
   responseTime({
@@ -45,12 +47,15 @@ if (process.env.NODE_ENV === "production") {
 mongoose.Promise = global.Promise;
 
 //DB Config
-//Check if the APP Variable connects to KLA or KLC
-if (keys.CUSTOMER === "KLA") {
-  var db = keys.localMongoURI_KLA_OPS;
-} else {
-  var db = keys.localMongoURI_KLC_OPS;
-}
+const mongo_db_url =
+  process.env.NODE_ENV === "production"
+    ? localMongoURI_KLA_OPS_PROD
+    : localMongoURI_KLA_OPS_LOCAL;
+
+const mongo_db_db = keys.CUSTOMER === "KLA" ? "kla_ops_prod" : "klc_ops_prod";
+
+const db = `mongodb://${mongo_db_url}/${mongo_db_db}`;
+
 // const db = keys.mongoatlas;
 // console.log(db);
 

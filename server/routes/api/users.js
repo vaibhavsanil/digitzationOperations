@@ -107,7 +107,7 @@ router.post("/login", (req, res) => {
           status_user: user.status_user,
         }; // Create JWT payload
 
-        console.log(`[DEBUG] [JWT] The payload is ${keys.secretOrKey}`);
+        // console.log(`[DEBUG] [JWT] The payload is ${keys.secretOrKey}`);
 
         //Sign Token
         jwt.sign(
