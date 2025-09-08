@@ -54,6 +54,7 @@ if (keys.CUSTOMER === "KLA") {
 app.use((req, res, next) => {
   res.set("X-Frame-Options", "SAMEORIGIN");
   res.set("X-Content-Type-Options", "nosniff");
+  res.removeHeader("X-Powered-By");
   next();
 });
 

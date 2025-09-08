@@ -1,11 +1,11 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
-import AdminContext from './adminContext';
-import AdminReducer from './adminReducer';
+import AdminContext from "./adminContext";
+import AdminReducer from "./adminReducer";
 
-import setAuthToken from '../../utils/setAuthToken';
+import setAuthToken from "../../utils/setAuthToken";
 
 import {
   GET_ADMIN_USERS,
@@ -19,7 +19,7 @@ import {
   REMOVE_USER_LOGS,
   GET_STATS,
   REMOVE_STATS,
-} from '../types';
+} from "../types";
 
 const AdminState = (props) => {
   const initialState = {
@@ -36,11 +36,11 @@ const AdminState = (props) => {
   const getStats = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     try {
-      const res = await axios.get('api/stats/all');
+      const res = await axios.get("api/stats/all");
 
       dispatch({ type: GET_STATS, payload: res.data });
     } catch (error) {
@@ -56,15 +56,15 @@ const AdminState = (props) => {
 
   //Load User for Admin roles
 
-  const getUsersAdmin = async () => {
+  const getUsersAdmin = async (created_by) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.get('api/users/getusers');
+      const res = await axios.get(`api/users/getusers/${created_by}`);
 
       dispatch({ type: GET_ADMIN_USERS, payload: res.data });
     } catch (err) {
@@ -77,12 +77,12 @@ const AdminState = (props) => {
   const registerUser = async (formData) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.post('/api/users/register', formData, config);
+      const res = await axios.post("/api/users/register", formData, config);
 
       // dispatch({
       //   type: REGISTER_ADMIN_SUCCESS,
@@ -105,7 +105,7 @@ const AdminState = (props) => {
   const deleteUser = async (id) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -124,12 +124,12 @@ const AdminState = (props) => {
   const getUsersLogs = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
     try {
-      const res = await axios.get('api/users/logs');
+      const res = await axios.get("api/users/logs");
 
       dispatch({ type: GET_USER_LOGS, payload: res.data });
     } catch (err) {

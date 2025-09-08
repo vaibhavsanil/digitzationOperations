@@ -4,9 +4,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
+// const passport = require("passport");
 const auth = require("../../middleware/auth");
-const ownerorAdmin = require("../../middleware/ownerorAdmin");
 
 //Load Input Validation
 
@@ -28,90 +27,50 @@ router.get("/test", (req, res) => res.json({ msg: "Krishna Onde Jagadguru" }));
 // @desc  Register
 // @access Public
 
-// router.post("/register", (req, res) => {
-//   const { errors, isValid } = validateRegisterInput(req.body);
+router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
 
-//   //Check Validation
-//   if (!isValid) {
-//     return res.status(400).json(errors);
-//   }
-
-//   let userBody = {};
-
-//   userBody.name = req.body.name;
-//   userBody.email = req.body.email;
-//   userBody.password = req.body.password;
-//   userBody.admin_status = req.body.admin_status;
-//   if (req.body.phonenumber) userBody.phonenumber = req.body.phonenumber;
-//   if (req.body.joining_date) userBody.joining_date = req.body.joining_date;
-//   if (req.body.date_of_leaving)
-//     userBody.date_of_leaving = req.body.date_of_leaving;
-//   if (req.body.status_user) userBody.status_user = req.body.status_user;
-
-//   User.findOne({ email: req.body.email }).then((user) => {
-//     if (user) {
-//       errors.email = "Email Already exists";
-//       return res.status(400).json(errors);
-//     } else {
-//       const newUser = new User(userBody);
-
-//       bcrypt.genSalt(10, (err, salt) => {
-//         bcrypt.hash(newUser.password, salt, (err, hash) => {
-//           if (err) throw err;
-
-//           newUser.password = hash;
-//           newUser
-//             .save()
-//             .then((user) => res.json({ msg: "success", user }))
-//             .catch((err) =>
-//               res.status(400).json({
-//                 msg: "There is an internal error while saving user!!!",
-//               })
-//             );
-//         });
-//       });
-//     }
-//   });
-// });
-
-router.post("/register", auth, async (req, res) => {
-  try {
-    // 1. validation
-    const { errors, isValid } = validateRegisterInput(req.body);
-    if (!isValid) return res.status(400).json(errors);
-
-    // 2. duplicate email check
-    const existing = await User.findOne({
-      email: req.body.email.toLowerCase(),
-    });
-    if (existing)
-      return res.status(400).json({ email: "Email already exists" });
-
-    // 3. hash password
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(req.body.password, salt);
-
-    // 4. create user with created_by = logged-in admin
-    const user = await User.create({
-      name: req.body.name,
-      email: req.body.email.toLowerCase(),
-      password: hash,
-      admin_status: req.body.admin_status,
-      phonenumber: req.body.phonenumber,
-      joining_date: req.body.joining_date,
-      date_of_leaving: req.body.date_of_leaving,
-      status_user: req.body.status_user,
-      created_by: req.user.id, // <-- NEW
-    });
-
-    // 5. respond
-    return res.status(201).json({ msg: "success", user });
-  } catch (err) {
-    console.error(err);
-    return res
-      .status(500)
-      .json({ msg: "Internal server error while saving user" });
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
   }
+
+  let userBody = {};
+
+  userBody.name = req.body.name;
+  userBody.email = req.body.email;
+  userBody.password = req.body.password;
+  userBody.admin_status = req.body.admin_status;
+  if (req.body.phonenumber) userBody.phonenumber = req.body.phonenumber;
+  if (req.body.joining_date) userBody.joining_date = req.body.joining_date;
+  if (req.body.date_of_leaving)
+    userBody.date_of_leaving = req.body.date_of_leaving;
+  if (req.body.status_user) userBody.status_user = req.body.status_user;
+
+  User.findOne({ email: req.body.email }).then((user) => {
+    if (user) {
+      errors.email = "Email Already exists";
+      return res.status(400).json(errors);
+    } else {
+      const newUser = new User(userBody);
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+
+          newUser.password = hash;
+          newUser
+            .save()
+            .then((user) => res.json({ msg: "success", user }))
+            .catch((err) =>
+              res.status(400).json({
+                msg: "There is an internal error while saving user!!!",
+              })
+            );
+        });
+      });
+    }
+  });
 });
 
 // @route GET api/users/login        //
@@ -148,6 +107,8 @@ router.post("/login", (req, res) => {
           status_user: user.status_user,
         }; // Create JWT payload
 
+        // console.log(`[DEBUG] [JWT] The payload is ${keys.secretOrKey}`);
+
         //Sign Token
         jwt.sign(
           payload,
@@ -180,7 +141,7 @@ router.post("/userupdate/:userid", auth, (req, res) => {
 // @desc  UPDATE the user details
 // @access Private
 
-router.delete("/:userid", auth, ownerorAdmin, (req, res) => {
+router.delete("/:userid", auth, (req, res) => {
   let userId = req.params.userid;
 
   // Check of the User is admin
@@ -210,7 +171,7 @@ router.delete("/:userid", auth, ownerorAdmin, (req, res) => {
 // @access Private
 
 router.get("/getusers", auth, (req, res) => {
-  User.find({}, "-password -__v")
+  User.find({})
     .then((users) => {
       res.status(200).json(users); // Note  Send selected json response fields
     })
@@ -220,30 +181,6 @@ router.get("/getusers", auth, (req, res) => {
       errors.err = err;
       res.status(400).json(errors);
     });
-});
-
-// @route GET ALL USER
-// @desc  Get all the user details
-// @access Private
-router.get("/getusers/:created_by", auth, async (req, res) => {
-  try {
-    // Optional: restrict so you can only query your own created users
-    if (req.user.id !== req.params.created_by) {
-      return res
-        .status(403)
-        .json({ msg: "You can only view users you created" });
-    }
-
-    const users = await User.find(
-      { created_by: req.params.created_by },
-      "-password -__v"
-    ).lean();
-
-    res.json(users); // plain array
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Server error" });
-  }
 });
 
 // @route GET api/users/current

@@ -34,7 +34,7 @@ module.exports = function (req, res, next) {
       return logParam;
     }
 
-    const decoded = jwt.verify(token, keys.get("secretOrKey"));
+    const decoded = jwt.verify(token, keys.secretOrKey);
 
     // console.log('[DEBUG] from auth js decoded value', decoded);
 
