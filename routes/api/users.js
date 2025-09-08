@@ -27,50 +27,90 @@ router.get("/test", (req, res) => res.json({ msg: "Krishna Onde Jagadguru" }));
 // @desc  Register
 // @access Public
 
-router.post("/register", (req, res) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+// router.post("/register", (req, res) => {
+//   const { errors, isValid } = validateRegisterInput(req.body);
 
-  //Check Validation
-  if (!isValid) {
-    return res.status(400).json(errors);
+//   //Check Validation
+//   if (!isValid) {
+//     return res.status(400).json(errors);
+//   }
+
+//   let userBody = {};
+
+//   userBody.name = req.body.name;
+//   userBody.email = req.body.email;
+//   userBody.password = req.body.password;
+//   userBody.admin_status = req.body.admin_status;
+//   if (req.body.phonenumber) userBody.phonenumber = req.body.phonenumber;
+//   if (req.body.joining_date) userBody.joining_date = req.body.joining_date;
+//   if (req.body.date_of_leaving)
+//     userBody.date_of_leaving = req.body.date_of_leaving;
+//   if (req.body.status_user) userBody.status_user = req.body.status_user;
+
+//   User.findOne({ email: req.body.email }).then((user) => {
+//     if (user) {
+//       errors.email = "Email Already exists";
+//       return res.status(400).json(errors);
+//     } else {
+//       const newUser = new User(userBody);
+
+//       bcrypt.genSalt(10, (err, salt) => {
+//         bcrypt.hash(newUser.password, salt, (err, hash) => {
+//           if (err) throw err;
+
+//           newUser.password = hash;
+//           newUser
+//             .save()
+//             .then((user) => res.json({ msg: "success", user }))
+//             .catch((err) =>
+//               res.status(400).json({
+//                 msg: "There is an internal error while saving user!!!",
+//               })
+//             );
+//         });
+//       });
+//     }
+//   });
+// });
+
+router.post("/register", auth, async (req, res) => {
+  try {
+    // 1. validation
+    const { errors, isValid } = validateRegisterInput(req.body);
+    if (!isValid) return res.status(400).json(errors);
+
+    // 2. duplicate email check
+    const existing = await User.findOne({
+      email: req.body.email.toLowerCase(),
+    });
+    if (existing)
+      return res.status(400).json({ email: "Email already exists" });
+
+    // 3. hash password
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
+
+    // 4. create user with created_by = logged-in admin
+    const user = await User.create({
+      name: req.body.name,
+      email: req.body.email.toLowerCase(),
+      password: hash,
+      admin_status: req.body.admin_status,
+      phonenumber: req.body.phonenumber,
+      joining_date: req.body.joining_date,
+      date_of_leaving: req.body.date_of_leaving,
+      status_user: req.body.status_user,
+      created_by: req.user.id, // <-- NEW
+    });
+
+    // 5. respond
+    return res.status(201).json({ msg: "success", user });
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ msg: "Internal server error while saving user" });
   }
-
-  let userBody = {};
-
-  userBody.name = req.body.name;
-  userBody.email = req.body.email;
-  userBody.password = req.body.password;
-  userBody.admin_status = req.body.admin_status;
-  if (req.body.phonenumber) userBody.phonenumber = req.body.phonenumber;
-  if (req.body.joining_date) userBody.joining_date = req.body.joining_date;
-  if (req.body.date_of_leaving)
-    userBody.date_of_leaving = req.body.date_of_leaving;
-  if (req.body.status_user) userBody.status_user = req.body.status_user;
-
-  User.findOne({ email: req.body.email }).then((user) => {
-    if (user) {
-      errors.email = "Email Already exists";
-      return res.status(400).json(errors);
-    } else {
-      const newUser = new User(userBody);
-
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-
-          newUser.password = hash;
-          newUser
-            .save()
-            .then((user) => res.json({ msg: "success", user }))
-            .catch((err) =>
-              res.status(400).json({
-                msg: "There is an internal error while saving user!!!",
-              })
-            );
-        });
-      });
-    }
-  });
 });
 
 // @route GET api/users/login        //
