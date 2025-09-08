@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
+//const config = require("config");
 const mongoose = require("mongoose");
+const keys = require("../config/keys");
 
 // Import Mongoose Model
 const Logs = require("../models/Logs");
@@ -33,7 +34,7 @@ module.exports = function (req, res, next) {
       return logParam;
     }
 
-    const decoded = jwt.verify(token, config.get("secretOrKey"));
+    const decoded = jwt.verify(token, keys.get("secretOrKey"));
 
     // console.log('[DEBUG] from auth js decoded value', decoded);
 

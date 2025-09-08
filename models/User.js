@@ -34,6 +34,7 @@ const UserSchema = new Schema({
   number_books_completed: {
     type: Number, // Can we have virtual count property on this value based on book_sections_completed
   },
+  created_by: { type: Schema.Types.ObjectId, ref: "User" },
   book_sections_completed: [
     {
       type: Schema.Types.ObjectId, // Book Completed by the User link to Structural Book Collection
